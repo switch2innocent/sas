@@ -54,19 +54,19 @@ $(document).ready(() => {
 
         //Validate
         if (company_code === '0') { //Company selection
-            alert('Please select a company code.');
+            toastr.error('Please select a company code.');
             return;
         } else if (project_code === '' || company_code === '' || project_name === '' || locations === '' || city === '' || province === '' || association === '' || registry === '' || project_tct_no === '') { //Project details
-            alert('Please fill out project details.');
+            toastr.error('Please fill out project details.');
             return;
         } else if (contract_remarks[1] === '' || contract_date[1] === '' || contract_remarks[2] === '' || contract_date[2] === '' || contract_remarks[3] === '' || contract_date[3] === '' || contract_remarks[4] === '' || contract_date[4] === '' || contract_remarks[5] === '' || contract_date[5] === '') { //Contract Monitoring
-            alert('Please fill out contract monitoring');
+            toastr.error('Please fill out contract monitoring');
             return;
         } else if (pagibig_remarks[1] === '' || pagibig_date[1] === '' || pagibig_remarks[2] === '' || pagibig_date[2] === '' || pagibig_remarks[3] === '' || pagibig_date[3] === '' || pagibig_remarks[4] === '' || pagibig_date[4] === '' || pagibig_remarks[5] === '' || pagibig_date[5] === '') { //Pag-IBIG Monitoring
-            alert('Please fill out Pag-IBIG monitoring');
+            toastr.error('Please fill out Pag-IBIG monitoring');
             return;
         } else if (titling_remarks[1] === '' || titling_date[1] === '' || titling_remarks[2] === '' || titling_date[2] === '' || titling_remarks[3] === '' || titling_date[3] === '' || titling_remarks[4] === '' || titling_date[4] === '' || titling_remarks[5] === '' || titling_date[5] === '') { //Titling Monitoring
-            alert('Please fill out titling monitoring');
+            toastr.error('Please fill out titling monitoring');
             return;
         } else {
 
@@ -77,7 +77,7 @@ $(document).ready(() => {
             });
 
             if (contract_id.length < 1) {
-                alert("Please select at least one contract.");
+                toastr.error("Please select at least one contract.");
                 return;
             }
 
@@ -145,15 +145,17 @@ $(document).ready(() => {
                             success: (contract_r) => {
 
                                 if (contract_r > 0) {
-                                    alert('Project and contracts added successfully!');
-                                    location.href = 'project.php';
+                                    toastr.success('Project and contracts added successfully!');
+                                    setTimeout(() => {
+                                        location.href = 'project.php';
+                                    }, 2000);
                                 } else {
-                                    alert('Project saved, but contracts could not be linked.');
+                                    toastr.error('Project saved, but contracts could not be linked.');
                                 }
                             }
                         });
                     } else {
-                        alert('Error adding project.');
+                        toastr.error('Error adding project.');
                     }
                 }
             });
@@ -181,7 +183,7 @@ $(document).ready(() => {
         });
     });
 
-    //View company details using DataTable cells
+    //View project details using DataTable cells
     $('#datatable').on('dblclick', 'tbody tr', function () {
         const project_contract_Id = $(this).data('id');
 
@@ -231,19 +233,19 @@ $(document).ready(() => {
 
         //Validate
         if (upd_company_code === '0') { //Company selection
-            alert('Please select a company code.');
+            toastr.error('Please select a company code.');
             return;
         } else if (upd_project_code === '' || upd_company_code === '' || upd_project_name === '' || upd_locations === '' || upd_city === '' || upd_province === '' || upd_association === '' || upd_registry === '' || upd_project_tct_no === '') { //Project details
-            alert('Please fill out project details.');
+            toastr.error('Please fill out project details.');
             return;
         } else if (upd_contract_remarks[1] === '' || upd_contract_date[1] === '' || upd_contract_remarks[2] === '' || upd_contract_date[2] === '' || upd_contract_remarks[3] === '' || upd_contract_date[3] === '' || upd_contract_remarks[4] === '' || upd_contract_date[4] === '' || upd_contract_remarks[5] === '' || upd_contract_date[5] === '') { //Contract Monitoring
-            alert('Please fill out contract monitoring');
+            toastr.error('Please fill out contract monitoring');
             return;
         } else if (upd_pagibig_remarks[1] === '' || upd_pagibig_date[1] === '' || upd_pagibig_remarks[2] === '' || upd_pagibig_date[2] === '' || upd_pagibig_remarks[3] === '' || upd_pagibig_date[3] === '' || upd_pagibig_remarks[4] === '' || upd_pagibig_date[4] === '' || upd_pagibig_remarks[5] === '' || upd_pagibig_date[5] === '') { //Pag-IBIG Monitoring
-            alert('Please fill out Pag-IBIG monitoring');
+            toastr.error('Please fill out Pag-IBIG monitoring');
             return;
         } else if (upd_titling_remarks[1] === '' || upd_titling_date[1] === '' || upd_titling_remarks[2] === '' || upd_titling_date[2] === '' || upd_titling_remarks[3] === '' || upd_titling_date[3] === '' || upd_titling_remarks[4] === '' || upd_titling_date[4] === '' || upd_titling_remarks[5] === '' || upd_titling_date[5] === '') { //Titling Monitoring
-            alert('Please fill out titling monitoring');
+            toastr.error('Please fill out titling monitoring');
             return;
         } else {
 
@@ -254,7 +256,7 @@ $(document).ready(() => {
             });
 
             if (upd_contract_id.length < 1) {
-                alert("Please select at least one contract.");
+                toastr.error("Please select at least one contract.");
                 return;
             }
 
@@ -330,22 +332,24 @@ $(document).ready(() => {
                                         success: (contract_r) => {
 
                                             if (contract_r > 0) {
-                                                alert('Project and contracts added successfully!');
-                                                location.href = 'project.php';
+                                                toastr.success('Project and contracts updated successfully!');
+                                                setTimeout(() => {
+                                                    location.href = 'project.php';
+                                                }, 2000);
                                             } else {
-                                                alert('Project saved, but contracts could not be linked.');
+                                                toastr.error('Project saved, but contracts could not be linked.');
                                             }
                                         }
                                     });
 
                                 } else {
-                                    alert('Dekete project_contract Failed!');
+                                    toastr.error('Delete project_contract failed!');
                                 }
                             }
                         });
 
                     } else {
-                        alert('Error updating project.');
+                        toastr.error('Error updating project.');
                     }
 
                 }
@@ -361,18 +365,42 @@ $(document).ready(() => {
 
         const id = $(this).data('id');
 
-        $.ajax({
-            type: 'POST',
-            url: '../controls/delete_project.ctrl.php',
-            data: { id: id },
-            success: function (r) {
-                if (r > 0) {
-                    alert("deleted");
-                } else {
-                    alert("");
+        if (confirm("Are you sure you want to delete this project?")) {
+            $.ajax({
+                type: 'POST',
+                url: '../controls/delete_project.ctrl.php',
+                data: { id: id },
+                success: function (r) {
+                    if (r > 0) {
+                        toastr.success("Project deleted successfully!");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        toastr.error("Failed to delete project.");
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
 });
+
+//Toastr
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}

@@ -35,16 +35,16 @@ $(document).ready(() => {
         const pagibig_position = $('#pagibig_position').val();
         // //Validate
         if (company_code === '' || company_name === '' || company_address === '' || city_notary === '' || company_city === '' || company_tin === '' || company_ctc === '' || company_ctc_date === '' || company_ctc_place === '') {
-            alert('Please fill out all required fields in company details.');
+            toastr["error"]("Please fill out all required fields in company details.");
             return;
         } else if (company_person_a === '' || company_position_a === '' || company_person_tin_a === '' || person_ctc_a === '' || person_ctc_date_place_a === '') {
-            alert('Please fill out all required fields for Person A.');
+            toastr["error"]("Please fill out all required fields for Person A.");
             return;
         } else if (company_person_b === '' || company_position_b === '' || company_person_tin_b === '' || person_ctc_b === '' || person_ctc_date_place_b === '') {
-            alert('Please fill out all required fields for Person B.');
+            toastr["error"]("Please fill out all required fields for Person B.");
             return;
         } else if (pagibig_person === '' || pagibig_address === '' || pagibig_position === '') {
-            alert('Please fill out all required fields for Pag-IBIG personnel.');
+            toastr["error"]("Please fill out all required fields for Pag-IBIG personnel.");
             return;
         } else {
 
@@ -77,10 +77,12 @@ $(document).ready(() => {
                 },
                 success: function (r) {
                     if (r > 0) {
-                        alert('Company added successfully!');
-                        location.href = 'company.php';
+                        toastr["success"]("Company added successfully!");
+                        setTimeout(() => {
+                            location.href = 'company.php';
+                        }, 2000);
                     } else {
-                        alert('Failed to add company. Please try again.');
+                        toastr["error"]("Failed to add company. Please try again.");
                     }
                 },
 
@@ -153,16 +155,16 @@ $(document).ready(() => {
 
         //Validate
         if (company_code === '' || company_name === '' || company_address === '' || city_notary === '' || company_city === '' || company_tin === '' || company_ctc === '' || company_ctc_date === '' || company_ctc_place === '') {
-            alert('Please fill out all required fields in company details.');
+            toastr["error"]("Please fill out all required fields in company details.");
             return;
         } else if (company_person_a === '' || company_position_a === '' || company_person_tin_a === '' || person_ctc_a === '' || person_ctc_date_place_a === '') {
-            alert('Please fill out all required fields for Person A.');
+            toastr["error"]("Please fill out all required fields for Person A.");
             return;
         } else if (company_person_b === '' || company_position_b === '' || company_person_tin_b === '' || person_ctc_b === '' || person_ctc_date_place_b === '') {
-            alert('Please fill out all required fields for Person B.');
+            toastr["error"]("Please fill out all required fields for Person B.");
             return;
         } else if (pagibig_person === '' || pagibig_address === '' || pagibig_position === '') {
-            alert('Please fill out all required fields for Pag-IBIG personnel.');
+            toastr["error"]("Please fill out all required fields for Pag-IBIG personnel.");
             return;
         } else {
 
@@ -196,10 +198,12 @@ $(document).ready(() => {
                 },
                 success: function (r) {
                     if (r > 0) {
-                        alert('Company updated successfully!');
-                        location.href = 'company.php';
+                        toastr["success"]("Company updated successfully!");
+                        setTimeout(() => {
+                            location.href = 'company.php';
+                        }, 2000);
                     } else {
-                        alert('Failed to update company. Please try again.');
+                        toastr["error"]("Failed to update company. Please try again.");
                     }
                 },
 
@@ -208,3 +212,22 @@ $(document).ready(() => {
     });
 
 });
+
+//Toastr
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}

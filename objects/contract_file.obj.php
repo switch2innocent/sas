@@ -84,8 +84,17 @@ class ContractFile
         $download_contract_file = $this->conn->prepare($sql);
 
         $download_contract_file->bindParam(1, $this->id, PDO::PARAM_INT);
-        
+
         $download_contract_file->execute();
         return $download_contract_file;
+    }
+
+    public function count_contracts()
+    {
+        $sql = "SELECT COUNT(id) AS total_contract FROM contract_files_tbl WHERE is_active=1;";
+        $count_contract = $this->conn->prepare($sql);
+
+        $count_contract->execute();
+        return $count_contract;
     }
 }

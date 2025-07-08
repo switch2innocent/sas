@@ -27,7 +27,7 @@ while ($row = $get->fetch(PDO::FETCH_ASSOC)) {
         <div class="form-group">
             <label for="contractType">Type <span style="color:red">*</span></label>
     <select class="form-control" id="upd_contractType" name="contractType" required>
-    <option value="' . (int)$row['contract_type_id'] . '" disabled selected>' . $row['description'] . '</option>
+    <option value="' . (int)$row['contract_type_id'] . '">' . $row['description'] . '</option>
     ';
     while ($row2 = $get_contract->fetch(PDO::FETCH_ASSOC)) {
         if ((int)$row2['id'] !== (int)$row['contract_type_id']) {

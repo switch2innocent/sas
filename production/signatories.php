@@ -2,7 +2,7 @@
 session_start();
 
 require_once '../config/dbconn.php';
-require_once '../objects/project.obj.php';
+require_once '../objects/signatories.obj.php';
 
 $database = new Connection();
 $db = $database->connect();
@@ -22,7 +22,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SAS | Project</title>
+    <title>SAS | Signatories</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,13 +39,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../build/css/custom_switch.style.css">
-
-    <style>
-        #datatable tbody tr {
-            cursor: help;
-        }
-    </style>
 </head>
 
 <body class="nav-md">
@@ -138,7 +131,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h5>Masters / <b><a href="project.php">Project</a></b></h5>
+                            <h5>Masters / <b><a href="signatories.php">Signatories</a></b></h5>
                         </div>
 
                         <div class="title_right">
@@ -160,18 +153,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Project Table</h2>
+                                    <h2>Signatories Table</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                                             <!-- <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Settings 1</a>
-                                                </li>
-                                                <li><a href="#">Settings 2</a>
-                                                </li>
-                                            </ul> -->
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul> -->
                                         </li>
                                         <li><a class="close-link"><i class="fa fa-close"></i></a>
                                         </li>
@@ -181,29 +174,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <div class="x_content">
                                     <!-- button -->
                                     <div class="btn-group" style="margin-bottom: 15px;">
-                                        <a href="add_project.php" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i> Add New</button>
                                     </div>
-                                    <table id="datatable" class="table table-striped table-bordered datatable">
+                                    <table id="datatable" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Project Code</th>
-                                                <th class="text-center">Company</th>
-                                                <th class="text-center">Project Name</th>
-                                                <th class="text-center">Actions</th>
+                                                <th class="text-center">Person</th>
+                                                <th class="text-center">Position</th>
+                                                <th class="text-center">Person TIN</th>
+                                                <th class="text-center">Person CTC</th>
+                                                <th class="text-center">Person CTC Date Place</th>
+                                                <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $view_project = new Project($db);
+                                            $view_signatory = new Signatories($db);
 
-                                            $view = $view_project->view_projects();
+                                            $view = $view_signatory->view_signatories();
 
                                             while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
                                                 echo '
-                                                <tr data-id="' . htmlspecialchars($row['id']) . '">
-                                                    <td class="text-center">' . htmlspecialchars($row['project_code']) . '</td>
-                                                    <td class="text-center">' . htmlspecialchars($row['company_name']) . '</td>
-                                                    <td class="text-center">' . htmlspecialchars($row['project_name']) . '</td>
+                                                 <tr data-id="' . htmlspecialchars($row['id']) . '">
+                                                    <td class="text-center">' . htmlspecialchars($row['company_person']) . '</td>
+                                                    <td class="text-center">' . htmlspecialchars($row['company_position']) . '</td>
+                                                    <td class="text-center">' . htmlspecialchars($row['company_person_tin']) . '</td>
+                                                    <td class="text-center">' . htmlspecialchars($row['person_ctc']) . '</td>
+                                                    <td class="text-center">' . htmlspecialchars($row['person_ctc_date_place']) . '</td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -212,19 +209,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <a class="view_all" href="#" data-id="' . $row['id'] . '"><i class="fa fa-eye"></i> View</a>
+                                                                    <a class="edit" data-id="' . $row['id'] . '"><i class="fa fa-edit"></i> Edit</a>
                                                                 </li>
-                                                                <li>
-                                                                    <a class="edit" href="edit_project.php?id=' . htmlspecialchars($row['id']) . '"><i class="fa fa-edit"></i> Edit</a>
-                                                                </li>
-                                                                <li>
+                                                                 <li>
                                                                     <a class="delete" href="#" data-id="' . $row['id'] . '"><i class="fa fa-trash"></i> Delete</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </td>
-                                                </tr>';
+                                                </tr>
+                                                ';
                                             }
+
                                             ?>
                                         </tbody>
                                     </table>
@@ -236,25 +232,69 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
             <!-- /page content -->
 
-            <!-- View Project Modal -->
-            <div class="modal fade" id="viewModal">
-                <div class="modal-dialog modal-lg">
+            <!-- Add Signatories Modal -->
+            <div class="modal fade" id="addModal">
+                <div class="modal-dialog">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title"><i class="fa fa-eye"></i> View Project</h4>
+                            <h4 class="modal-title"><i class="fa fa-plus"></i> Add Signatory</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form autocomplete="off">
+                                <div class="form-group">
+                                    <label for="company_person">Company Person <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="company_person" name="company_person">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company_position">Company Position <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="company_position" name="company_position">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company_person_tin">Company Person TIN <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="company_person_tin" name="company_person_tin">
+                                </div>
+                                <div class="form-group">
+                                    <label for="person_ctc">Person CTC <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="person_ctc" name="person_ctc">
+                                </div>
+                                <div class="form-group">
+                                    <label for="person_ctc_date_place">Company CTC Date Place <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="person_ctc_date_place" name="person_ctc_date_place">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button class="btn btn-success" id="submit">Submit</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Contract Modal -->
+            <div class="modal fade" id="editModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Signatory</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
                         <!-- Modal body -->
-                        <div class="modal-body" id="view_modalBody">
-                            <!-- Content goes here -->
+                        <div class="modal-body" id="edit_modalBody">
+                            <!-- content goes here -->
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button class="btn btn-success" id="update">Update</button>
                         </div>
 
                     </div>
@@ -293,7 +333,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    <script src="../assets/js/project.script.js"></script>
+    <script src="../assets/js/signatories.script.js"></script>
 
 </body>
 

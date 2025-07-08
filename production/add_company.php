@@ -16,15 +16,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>IDS | Add Company</title>
+  <title>SAS | Add Company</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- NProgress -->
-  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-
+  <!-- Toastr CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
 </head>
@@ -63,11 +62,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <li><a href="company.php">Company</a></li>
                     <li><a href="project.php">Project</a></li>
                     <li><a href="contract.php">Contract</a></li>
+                    <li><a href="signatories.php">Signatories</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Customer Data <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Customer Details</a></li>
+                    <li><a href="customer_details.php">Customer Details</a></li>
                     <li><a href="#">Subdivision Customer Upload</a></li>
                     <li><a href="#">Condo Customer Upload</a></li>
                   </ul>
@@ -165,7 +165,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                   <br>
                   <form>
                     <div class="panel panel-default">
-                      <div class="panel-heading"><strong>Company Details</strong></div>
+                      <div class="panel-heading"><strong><span class="fa fa-building"></span> Company Details</strong></div>
                       <div class="panel-body">
                         <div class="row">
                           <div class="col-md-4">
@@ -215,13 +215,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
 
                     <div class="panel panel-default">
-                      <div class="panel-heading"><strong>Company Personnels</strong></div>
+                      <div class="panel-heading"><strong><span class="fa fa-user"></span> Company Personnels</strong></div>
                       <div class="panel-body">
                         <div class="row">
                           <!-- Personnel A -->
                           <div class="col-md-6">
                             <fieldset style="border:1px solid #ddd; padding:15px; border-radius:10px;">
-                              <legend style="font-size:16px; font-weight:bold;">Personnel A</legend>
+                              <legend style="font-size:16px; font-weight:bold;"><span class="fa fa-user"></span> Personnel A</legend>
                               <div class="form-group">
                                 <label for="company_person_a">Company Person <span style="color:red">*</span></label>
                                 <input type="text" class="form-control" id="company_person_a" name="company_person_a" required>
@@ -247,7 +247,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                           <!-- Personnel B -->
                           <div class="col-md-6">
                             <fieldset style="border:1px solid #ddd; padding:15px; border-radius:10px;">
-                              <legend style="font-size:16px; font-weight:bold;">Personnel B</legend>
+                              <legend style="font-size:16px; font-weight:bold;"><span class="fa fa-user"></span> Personnel B</legend>
                               <div class="form-group">
                                 <label for="company_person_b">Company Name <span style="color:red">*</span></label>
                                 <input type="text" class="form-control" id="company_person_b" name="company_person_b" required>
@@ -275,7 +275,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
 
                     <div class="panel panel-default">
-                      <div class="panel-heading"><strong>Pag-Ibig Personnel</strong></div>
+                      <div class="panel-heading"><strong><span class="fa fa-users"></span> Pag-Ibig Personnel</strong></div>
                       <div class="panel-body">
                         <div class="row">
                           <div class="col-md-4">
@@ -301,7 +301,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-success btn-md buttonFinish"><i class="fa fa-save"></i> Save</button>
+                      <a class="btn btn-success btn-md buttonFinish" id="saveCompanyBtn"><i class="fa fa-save"></i> Save</a>
                       <button type="reset" class="btn btn-default btn-md"><i class="fa fa-undo"></i> Reset</button>
                     </div>
                   </form>
@@ -329,15 +329,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
-  <!-- jQuery Smart Wizard -->
-  <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+  <!-- Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
-
   <script src="../assets/js/company.script.js"></script>
 </body>
 

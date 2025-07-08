@@ -15,7 +15,7 @@ $(document).ready(function () {
             //     text: 'Please fill in all fields.'
             // });
             // return
-            alert('Please fill in all fields.');
+            toastr.warning('Please fill in all fields.', 'Missing Fields');
 
         } else {
 
@@ -42,8 +42,10 @@ $(document).ready(function () {
                                     // }).then(function () {
                                     //     window.location.href = 'dashboard.php';
                                     // });
-                                    alert('Access Granted! You have successfully logged in.');
-                                    window.location.href = 'production/dashboard.php';
+                                    toastr.success('You have successfully logged in.', 'Access Granted');
+                                    setTimeout(function () {
+                                        window.location.href = 'production/dashboard.php';
+                                    }, 2000);
 
                                 } else {
 
@@ -52,7 +54,7 @@ $(document).ready(function () {
                                     //     title: 'Account Not Activated',
                                     //     text: 'Your account is not yet activated. Please contact the administrator for support.'
                                     // });
-                                    alert('Account Not Activated! Your account is not yet activated. Please contact the administrator for support.');
+                                    toastr.warning('Your account is not yet activated. Please contact the administrator for support.', 'Account Not Activated');
 
                                 }
                             }
@@ -65,7 +67,7 @@ $(document).ready(function () {
                         //     title: 'Login Failed',
                         //     text: 'Invalid Username or Password! Please try again.'
                         // });
-                        alert('Login Failed! Invalid Username or Password! Please try again.');
+                        toastr.error('Invalid Username or Password! Please try again.', 'Login Failed');
 
                     }
                 }
@@ -73,3 +75,22 @@ $(document).ready(function () {
         }
     });
 });
+
+//Toastr
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}

@@ -23,16 +23,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>IDS | Contract</title>
+  <title>SAS | Contract</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- NProgress -->
-  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-  <!-- iCheck -->
-  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <!-- Toastr CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
   <!-- Datatables -->
   <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -78,11 +76,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <li><a href="company.php">Company</a></li>
                     <li><a href="project.php">Project</a></li>
                     <li><a href="contract.php">Contract</a></li>
+                    <li><a href="signatories.php">Signatories</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Customer Data <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Customer Details</a></li>
+                    <li><a href="customer_details.php">Customer Details</a></li>
                     <li><a href="#">Subdivision Customer Upload</a></li>
                     <li><a href="#">Condo Customer Upload</a></li>
                   </ul>
@@ -198,7 +197,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <tr>
                           <td class="text-center">' . htmlspecialchars($row['contract_name']) . '</td>
                           <td class="text-center">' . htmlspecialchars($row['description']) . '</td>
-                          <td class="text-center">' . ($row['is_active'] ? 'Active' : 'Inactive') . '</td>
+                          <td class="text-center text-success"><strong>' . ($row['is_active'] ? 'Active' : 'Inactive') . '</strong></td>
                           <td class="text-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -207,7 +206,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                               </button>
                               <ul class="dropdown-menu">
                                 <li>
-                                 <a class="download" href="../controls/download_contract_files.ctrl.php?id=' . htmlspecialchars($row['id']) . '"><i class="fa fa-eye"></i> Download</a>
+                                 <a class="download" href="../controls/download_contract_files.ctrl.php?id=' . htmlspecialchars($row['id']) . '"><i class="fa fa-download"></i> Download</a>
                                 </li>
                                 <li>
                                   <a class="edit" href="#" data-id="' . $row['id'] . '"><i class="fa fa-edit"></i> Edit</a>
@@ -318,12 +317,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
-  <!-- iCheck -->
-  <script src="../vendors/iCheck/icheck.min.js"></script>
   <!-- Datatables -->
   <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -337,10 +330,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
   <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
   <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-  <script src="../vendors/jszip/dist/jszip.min.js"></script>
-  <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-  <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
+  <!-- Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
   <script src="../assets/js/contract.script.js"></script>

@@ -22,7 +22,7 @@ $(document).ready(() => {
         formData.append('contract_type', contract_type);
 
         if (contract_name === '' || contract_type === '' || !doc_file) {
-            alert('Please fill in all fields.');
+            toastr.error('Please fill in all fields.');
             return;
         } else {
 
@@ -34,10 +34,12 @@ $(document).ready(() => {
                 contentType: false,
                 success: function (r) {
                     if (r > 0) {
-                        alert('Contract added successfully!');
-                        location.reload();
+                        toastr.success('Contract added successfully!');
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000);
                     } else {
-                        alert('Failed to add contract. Please try again.');
+                        toastr.error('Failed to add contract. Please try again.');
                     }
                 }
             });
@@ -80,7 +82,7 @@ $(document).ready(() => {
         formData.append('id', id);
 
         if (contract_name === '' || contract_type === '' || !doc_file) {
-            alert('Please fill in all fields.');
+            toastr.error('Please fill in all fields.');
             return;
         } else {
 
@@ -92,10 +94,12 @@ $(document).ready(() => {
                 contentType: false,
                 success: function (r) {
                     if (r > 0) {
-                        alert('Contract updated successfully!');
-                        location.reload();
+                        toastr.success('Contract updated successfully!');
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000);
                     } else {
-                        alert('Failed to update contract. Please try again.');
+                        toastr.error('Failed to update contract. Please try again.');
                     }
                 }
             });
@@ -108,16 +112,30 @@ $(document).ready(() => {
 
         const id = $(this).data('id');
 
-        if (confirm('Are you sure you want to delete this contract?')) {
-            $.ajax({
-                type: 'POST',
-                url: '../controls/delete_contract_files.ctrl.php',
-                data: { id: id },
-                success: function () {
-                    location.reload();
+        toastr.warning(
+            'Are you sure you want to delete this contract?<br /><br /><button type="button" class="btn btn-danger btn-sm" id="toastr-confirm-delete">Yes, Delete</button>',
+            'Confirm Delete',
+            {
+                closeButton: true,
+                allowHtml: true,
+                timeOut: 0,
+                extendedTimeOut: 0,
+                tapToDismiss: false,
+                onShown: function () {
+                    $('#toastr-confirm-delete').on('click', function () {
+                        $.ajax({
+                            type: 'POST',
+                            url: '../controls/delete_contract_files.ctrl.php',
+                            data: { id: id },
+                            success: function () {
+                                toastr.clear();
+                                location.reload();
+                            }
+                        });
+                    });
                 }
-            });
-        }
+            }
+        );
     });
 
     //Download contract
@@ -142,3 +160,22 @@ $(document).ready(() => {
     // });
 
 });
+
+//Toastr
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}

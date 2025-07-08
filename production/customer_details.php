@@ -22,7 +22,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SAS | Project</title>
+    <title>SAS | Customer Details</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,6 +30,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Datatables -->
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -42,7 +43,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" href="../build/css/custom_switch.style.css">
 
     <style>
-        #datatable tbody tr {
+        .datatable tbody tr {
             cursor: help;
         }
     </style>
@@ -77,7 +78,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <ul class="nav side-menu">
                                 <li><a href="dashboard.php"><i class="fa fa-home"></i> Dashboard </a>
                                 </li>
-                                <li class="active"><a><i class="fa fa-database"></i> Masters <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-database"></i> Masters <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="company.php">Company</a></li>
                                         <li><a href="project.php">Project</a></li>
@@ -138,7 +139,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h5>Masters / <b><a href="project.php">Project</a></b></h5>
+                            <h5>Customer Data / <b><a href="customer_details.php">Customer Details</a></b></h5>
                         </div>
 
                         <div class="title_right">
@@ -160,7 +161,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Project Table</h2>
+                                    <h2>Customer Table</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -181,51 +182,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <div class="x_content">
                                     <!-- button -->
                                     <div class="btn-group" style="margin-bottom: 15px;">
-                                        <a href="add_project.php" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>
+                                        <a href="add_customer_details.php" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>
                                     </div>
-                                    <table id="datatable" class="table table-striped table-bordered datatable">
+                                    <table class="table table-striped table-bordered datatable">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Project Code</th>
-                                                <th class="text-center">Company</th>
-                                                <th class="text-center">Project Name</th>
+                                                <th class="text-center">id</th>
+                                                <th class="text-center">Code</th>
+                                                <th class="text-center">Customer Name</th>
+                                                <th class="text-center">Project</th>
+                                                <th class="text-center">House No.</th>
+                                                <th class="text-center">Lot</th>
+                                                <th class="text-center">Block</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php
-                                            $view_project = new Project($db);
-
-                                            $view = $view_project->view_projects();
-
-                                            while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
-                                                echo '
-                                                <tr data-id="' . htmlspecialchars($row['id']) . '">
-                                                    <td class="text-center">' . htmlspecialchars($row['project_code']) . '</td>
-                                                    <td class="text-center">' . htmlspecialchars($row['company_name']) . '</td>
-                                                    <td class="text-center">' . htmlspecialchars($row['project_name']) . '</td>
-                                                    <td class="text-center">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                More <span class="fa fa-caret-down"></span>
-                                                            </button>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li>
-                                                                    <a class="view_all" href="#" data-id="' . $row['id'] . '"><i class="fa fa-eye"></i> View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="edit" href="edit_project.php?id=' . htmlspecialchars($row['id']) . '"><i class="fa fa-edit"></i> Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="delete" href="#" data-id="' . $row['id'] . '"><i class="fa fa-trash"></i> Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                </tr>';
-                                            }
-                                            ?>
+                                        <tbody id="customer_details_body">
+                                            <!-- Content Goes Here... -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -291,9 +264,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    <script src="../assets/js/project.script.js"></script>
+    <script src="../assets/js/customer_details.script.js"></script>
 
 </body>
 

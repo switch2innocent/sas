@@ -168,4 +168,22 @@ class Project
             return false;
         }
     }
+
+    public function get_project_names()
+    {
+        $sql = "SELECT id, project_name FROM project_tbl WHERE is_active=1";
+        $get_project_name = $this->conn->prepare($sql);
+
+        $get_project_name->execute();
+        return $get_project_name;
+    }
+
+    public function count_projects()
+    {
+        $sql = "SELECT COUNT(id) AS total_project FROM project_tbl WHERE is_active=1;";
+        $count_project = $this->conn->prepare($sql);
+
+        $count_project->execute();
+        return $count_project;
+    }
 }

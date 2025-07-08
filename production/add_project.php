@@ -24,16 +24,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>IDS | Add Project</title>
+    <title>SAS | Add Project</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Switchery -->
-    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <!-- Datatables -->
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -81,11 +79,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                         <li><a href="company.php">Company</a></li>
                                         <li><a href="project.php">Project</a></li>
                                         <li><a href="contract.php">Contract</a></li>
+                                        <li><a href="signatories.php">Signatories</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Customer Data <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="#">Customer Details</a></li>
+                                        <li><a href="customer_details.php">Customer Details</a></li>
                                         <li><a href="#">Subdivision Customer Upload</a></li>
                                         <li><a href="#">Condo Customer Upload</a></li>
                                     </ul>
@@ -183,7 +182,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     <br>
                                     <form>
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Project Details</strong></div>
+                                            <div class="panel-heading"><strong><span class="fa fa-building"></span> Project Details</strong></div>
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <!-- Column 1 -->
@@ -267,7 +266,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                                         <!-- Contract Monitoring -->
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Contract Monitoring</strong></div>
+                                            <div class="panel-heading"><strong><span class="fa fa-file-text"></span> Contract Monitoring</strong></div>
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
@@ -290,7 +289,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                                         <!-- Pagibig Monitoring -->
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Pagibig Monitoring</strong></div>
+                                            <div class="panel-heading"><strong><span class="fa fa-money"></span> Pagibig Monitoring</strong></div>
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
@@ -313,7 +312,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                                         <!-- Titling Monitoring -->
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Titling Monitoring</strong></div>
+                                            <div class="panel-heading"><strong><span class="fa fa-certificate"></span> Titling Monitoring</strong></div>
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
@@ -336,35 +335,34 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                                         <!-- Contracts -->
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Contracts</strong></div>
+                                            <div class="panel-heading"><strong><span class="fa fa-folder-open"></span> Contracts</strong></div>
                                             <div class="panel-body">
                                                 <p><strong>NOTE</strong>: Select the contracts that should be assigned to this project. Only checked contracts will be linked.</p>
                                                 <div class="row">
-                                                    <table class="table table-striped table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center"><input type="checkbox" id="check_all"></input></th>
-                                                                <th class="text-center">Contract Name</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-                                                            $view_contract_file = new ContractFile($db);
-
-                                                            $view = $view_contract_file->view_contract_files();
-
-                                                            while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
-                                                                echo '
-                                                                    <tr>
-                                                                    <td class="text-center"><input type="checkbox" name="contract_id" class="checklist" value="' . $row['id'] . '"></td>
-                                                                    <td class="text-center">' . htmlspecialchars($row['contract_name']) . '</td>
-                                                                    </tr>
-                                                                ';
-                                                            }
-                                                            ?>
-
-                                                        </tbody>
+                                                    <div style="max-height: 250px; overflow-y: auto;">
+                                                        <table class="table table-bordered">
+                                                            <thead style="position: sticky; top: 0; background: #fff; z-index: 2; background-color: #f5f5f5;">
+                                                                <tr>
+                                                                    <th class="text-center"><input type="checkbox" id="check_all"></th>
+                                                                    <th class="text-center">Contract Name</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                $view_contract_file = new ContractFile($db);
+                                                                $view = $view_contract_file->view_contract_files();
+                                                                while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
+                                                                    echo '
+                                                                        <tr>
+                                                                            <td class="text-center"><input type="checkbox" name="contract_id" class="checklist" value="' . $row['id'] . '"></td>
+                                                                            <td class="text-center">' . htmlspecialchars($row['contract_name']) . '</td>
+                                                                        </tr>
+                                                                    ';
+                                                                }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                     </table>
                                                 </div>
                                             </div>
@@ -399,14 +397,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- Switchery -->
-    <script src="../vendors/switchery/dist/switchery.min.js"></script>
-    <!-- jQuery Smart Wizard -->
-    <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <!-- Datatables -->
     <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -420,12 +410,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-
     <script src="../assets/js/project.script.js"></script>
 </body>
 

@@ -18,6 +18,8 @@
   <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- Animate.css -->
   <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
+  <!-- Toastr CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 
   <!-- Custom Theme Style -->
   <link href="build/css/custom.min.css" rel="stylesheet">
@@ -97,6 +99,8 @@
 
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="assets/js/index.script.js"></script>
 
 </html>

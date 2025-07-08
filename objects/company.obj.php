@@ -100,4 +100,13 @@ class Company
             return false;
         }
     }
+
+    public function count_companys()
+    {
+        $sql = "SELECT COUNT(id) AS total_company FROM company_tbl WHERE is_active=1;";
+        $count_company = $this->conn->prepare($sql);
+
+        $count_company->execute();
+        return $count_company;
+    }
 }

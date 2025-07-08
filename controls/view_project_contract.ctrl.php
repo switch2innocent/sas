@@ -163,8 +163,9 @@ while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
             <div class="panel-heading"><strong>Contracts</strong></div>
             <div class="panel-body">
                 <div class="row">
+                  <div style="max-height: 250px; overflow-y: auto;">
                     <table class="table table-bordered">
-                        <thead>
+                        <thead style="position: sticky; top: 0; background: #fff; z-index: 2; background-color: #f5f5f5;">
                             <tr>
                                 <th class="text-center">Contract Name</th>
                             </tr>
@@ -176,7 +177,7 @@ while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
         $hasContracts = true;
         echo '
                             <tr>
-                                <td>' . $row2['contract_name'] . '</td>
+                                <td class="text-center">' . $row2['contract_name'] . '</td>
                             </tr>
                             ';
     }
@@ -186,6 +187,7 @@ while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
 
     echo '</tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

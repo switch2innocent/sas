@@ -1,6 +1,15 @@
 <?php
 session_start();
 
+require_once '../config/dbconn.php';
+require_once '../objects/customer.obj.php';
+require_once '../objects/project.obj.php';
+require_once '../objects/contract_file.obj.php';
+require_once '../objects/company.obj.php';
+
+$database = new Connection();
+$db = $database->connect();
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   header('location: ../index.php');
   exit;
@@ -16,23 +25,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>IDS | Dashboard</title>
+  <title>SAS | Dashboard</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- NProgress -->
-  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-  <!-- iCheck -->
-  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-  <!-- bootstrap-progressbar -->
-  <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-  <!-- JQVMap -->
-  <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-  <!-- bootstrap-daterangepicker -->
-  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
 
@@ -69,11 +67,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <li><a href="company.php">Company</a></li>
                     <li><a href="project.php">Project</a></li>
                     <li><a href="contract.php">Contract</a></li>
+                    <li><a href="signatories.php">Signatories</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Customer Data <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Customer Details</a></li>
+                    <li><a href="customer_details.php">Customer Details</a></li>
                     <li><a href="#">Subdivision Customer Upload</a></li>
                     <li><a href="#">Condo Customer Upload</a></li>
                   </ul>
@@ -141,46 +140,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
           <div class="row">
 
-            <!-- top tiles -->
-            <div class="tile_count">
-              <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                <div class="count">2500</div>
-                <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-                <div class="count">123.50</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-                <div class="count green">2,500</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-                <div class="count">4,567</div>
-                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
-                <div class="count">2,315</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-                <div class="count">7,325</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-              </div>
-            </div>
-            <!-- /top tiles -->
-
             <!-- Tabs -->
             <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><i class="fa fa-bars"></i> Window 1 </h2>
+                  <h2><i class="fa fa-bars"></i> Customers</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -193,6 +157,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+
+                  <div class="tile_stats_count text-center" style="padding: 20px 0;">
+                    <span class="count_top" style="font-size:16px;"><i class="fa fa-user"></i> Total Customers</span>
+                    <div class="count" style="font-size:32px; font-weight:bold; margin:10px 0;">
+                      <?php
+                      $count_customer = new Customer($db);
+
+                      $count = $count_customer->count_customers();
+                      while ($row = $count->fetch(PDO::FETCH_ASSOC)) {
+                        echo $row['total_customer'];
+                      }
+                      ?>
+                    </div>
+                    <span class="count_bottom" style="font-size:13px;">
+                      <i class="green" style="font-weight:bold;">Current status </i>
+                    </span>
+                  </div>
 
                 </div>
               </div>
@@ -201,7 +182,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><i class="fa fa-bars"></i> Window 2 </h2>
+                  <h2><i class="fa fa-bars"></i> Projects </h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -214,6 +195,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+
+                  <div class="tile_stats_count text-center" style="padding: 20px 0;">
+                    <span class="count_top" style="font-size:16px;"><i class="fa fa-building"></i> Number of Projects</span>
+                    <div class="count" style="font-size:32px; font-weight:bold; margin:10px 0;">
+                      <?php
+                      $count_project = new Project($db);
+
+                      $count = $count_project->count_projects();
+                      while ($row2 = $count->fetch(PDO::FETCH_ASSOC)) {
+                        echo $row2['total_project'];
+                      }
+                      ?>
+                    </div>
+                    <span class="count_bottom" style="font-size:13px;">
+                      <i class="green" style="font-weight:bold;">Current status </i>
+                    </span>
+                  </div>
 
                 </div>
               </div>
@@ -222,7 +220,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><i class="fa fa-bars"></i> Window 3 </h2>
+                  <h2><i class="fa fa-bars"></i> Contract Files</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -235,6 +233,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+
+                  <div class="tile_stats_count text-center" style="padding: 20px 0;">
+                    <span class="count_top" style="font-size:16px;"><i class="fa fa-file-text"></i> Contract Files</span>
+                    <div class="count" style="font-size:32px; font-weight:bold; margin:10px 0;">
+                      <?php
+                      $count_contract = new ContractFile($db);
+
+                      $count = $count_contract->count_contracts();
+                      while ($row3 = $count->fetch(PDO::FETCH_ASSOC)) {
+                        echo $row3['total_contract'];
+                      }
+                      ?>
+                    </div>
+                    <span class="count_bottom" style="font-size:13px;">
+                      <i class="green" style="font-weight:bold;">Current status </i>
+                    </span>
+                  </div>
 
                 </div>
               </div>
@@ -243,7 +258,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><i class="fa fa-bars"></i> Window 4 </h2>
+                  <h2><i class="fa fa-bars"></i> Company </h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -256,6 +271,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+
+                  <div class="tile_stats_count text-center" style="padding: 20px 0;">
+                    <span class="count_top" style="font-size:16px;"><i class="fa fa-building"></i> Company</span>
+                    <div class="count" style="font-size:32px; font-weight:bold; margin:10px 0;">
+                      <?php
+                      $count_company = new Company($db);
+
+                      $count = $count_company->count_companys();
+                      while ($row4 = $count->fetch(PDO::FETCH_ASSOC)) {
+                        echo $row4['total_company'];
+                      }
+                      ?>
+                    </div>
+                    <span class="count_bottom" style="font-size:13px;">
+                      <i class="green" style="font-weight:bold;">Current status </i>
+                    </span>
+                  </div>
 
                 </div>
               </div>
@@ -281,39 +313,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
-  <!-- Chart.js -->
-  <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-  <!-- gauge.js -->
-  <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-  <!-- bootstrap-progressbar -->
-  <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-  <!-- iCheck -->
-  <script src="../vendors/iCheck/icheck.min.js"></script>
-  <!-- Skycons -->
-  <script src="../vendors/skycons/skycons.js"></script>
-  <!-- Flot -->
-  <script src="../vendors/Flot/jquery.flot.js"></script>
-  <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-  <script src="../vendors/Flot/jquery.flot.time.js"></script>
-  <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-  <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-  <!-- Flot plugins -->
-  <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-  <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-  <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-  <!-- DateJS -->
-  <script src="../vendors/DateJS/build/date.js"></script>
-  <!-- JQVMap -->
-  <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-  <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-  <!-- bootstrap-daterangepicker -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
-  <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
 </body>
