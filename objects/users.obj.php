@@ -41,11 +41,13 @@ class Users
 
         session_start();
         if (session_destroy()) {
-            unset($_SESSION["id"]);
+            unset($_SESSION["user_id"]);
             unset($_SESSION["firstname"]);
             unset($_SESSION["lastname"]);
-            unset($_SESSION["position"]);
-            unset($_SESSION["role"]);
+            unset($_SESSION["user_position"]);
+            unset($_SESSION["user_role"]);
+            unset($_SESSION["user_name"]);
+            unset($_SESSION["fullname"]);
             return true;
         } else {
             return false;

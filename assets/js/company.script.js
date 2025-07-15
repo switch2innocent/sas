@@ -33,18 +33,10 @@ $(document).ready(() => {
         const pagibig_person = $('#pagibig_person').val();
         const pagibig_address = $('#pagibig_address').val();
         const pagibig_position = $('#pagibig_position').val();
-        // //Validate
-        if (company_code === '' || company_name === '' || company_address === '' || city_notary === '' || company_city === '' || company_tin === '' || company_ctc === '' || company_ctc_date === '' || company_ctc_place === '') {
-            toastr["error"]("Please fill out all required fields in company details.");
-            return;
-        } else if (company_person_a === '' || company_position_a === '' || company_person_tin_a === '' || person_ctc_a === '' || person_ctc_date_place_a === '') {
-            toastr["error"]("Please fill out all required fields for Person A.");
-            return;
-        } else if (company_person_b === '' || company_position_b === '' || company_person_tin_b === '' || person_ctc_b === '' || person_ctc_date_place_b === '') {
-            toastr["error"]("Please fill out all required fields for Person B.");
-            return;
-        } else if (pagibig_person === '' || pagibig_address === '' || pagibig_position === '') {
-            toastr["error"]("Please fill out all required fields for Pag-IBIG personnel.");
+
+        //Validate
+        if (company_code === '' || company_name === '' || company_address === '') {
+            toastr.error('Please complete all required fields marked with a red asterisk (*).');
             return;
         } else {
 
@@ -154,17 +146,8 @@ $(document).ready(() => {
         const pagibig_position = $('#upd_pagibig_position').val();
 
         //Validate
-        if (company_code === '' || company_name === '' || company_address === '' || city_notary === '' || company_city === '' || company_tin === '' || company_ctc === '' || company_ctc_date === '' || company_ctc_place === '') {
-            toastr["error"]("Please fill out all required fields in company details.");
-            return;
-        } else if (company_person_a === '' || company_position_a === '' || company_person_tin_a === '' || person_ctc_a === '' || person_ctc_date_place_a === '') {
-            toastr["error"]("Please fill out all required fields for Person A.");
-            return;
-        } else if (company_person_b === '' || company_position_b === '' || company_person_tin_b === '' || person_ctc_b === '' || person_ctc_date_place_b === '') {
-            toastr["error"]("Please fill out all required fields for Person B.");
-            return;
-        } else if (pagibig_person === '' || pagibig_address === '' || pagibig_position === '') {
-            toastr["error"]("Please fill out all required fields for Pag-IBIG personnel.");
+        if (company_code === '' || company_name === '' || company_address === '') {
+            toastr.error('Please complete all required fields marked with a red asterisk (*).');
             return;
         } else {
 

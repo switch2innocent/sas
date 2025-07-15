@@ -58,7 +58,7 @@ class ContractTitlingMonitoring
 
     public function get_customer_details()
     {
-        $sql = "SELECT c.id AS custom_id, ch.id AS house_id, ct.id AS cont_tit_id, c.*, ch.*, ct.*, p.project_name FROM customer_tbl c, customer_house_tbl ch, contract_titling_monitoring_tbl ct, project_tbl p WHERE c.id = ch.customer_id AND ch.id = ct.customer_house_id AND ch.project_id = p.id AND c.id=? AND c.is_active = 1";
+        $sql = "SELECT ch.project_id AS view_projects, c.id AS custom_id, ch.id AS house_id, ct.id AS cont_tit_id, c.*, ch.*, ct.*, p.project_name FROM customer_tbl c, customer_house_tbl ch, contract_titling_monitoring_tbl ct, project_tbl p WHERE c.id = ch.customer_id AND ch.id = ct.customer_house_id AND ch.project_id = p.id AND c.id=? AND c.is_active = 1";
         $get_customer_detail = $this->conn->prepare($sql);
 
         $get_customer_detail->bindParam(1, $this->id);
@@ -83,7 +83,7 @@ class ContractTitlingMonitoring
 
         // $sql = "SELECT c.customer_name, c.civil_status, c.legality, c.citizenship, ch.net_selling_price_word, ch.net_selling_price, ch.unit_no, ch.condo_type, ch.unit_floor, ch.unit_floor_sup, ch.unit_floor_area, ch.witness_a, ch.witness_b, c.customer_address, cf.contract_name, cf.contract_file FROM customer_tbl c, customer_house_tbl ch, project_contract_tbl pc, contract_files_tbl cf WHERE c.id=ch.customer_id AND ch.project_id = pc.project_id AND pc.contract_id = cf.id AND c.id=? AND cf.id=?;";
 
-        $sql = "SELECT CONCAT(u.firstname, ' ', u.lastname) AS full_name, c.customer_name, c.civil_status, c.legality, c.citizenship, ch.net_selling_price_word, ch.net_selling_price, ch.unit_no, ch.condo_type, ch.unit_floor, ch.unit_floor_sup, ch.unit_floor_area, ch.witness_a, ch.witness_b,c.customer_address, cf.contract_name,cf.contract_file FROM maindb.users u, idsdb.customer_tbl c, idsdb.customer_house_tbl ch, idsdb.project_contract_tbl pc, idsdb.contract_files_tbl cf WHERE c.created_by = u.id AND c.id=ch.customer_id AND ch.project_id = pc.project_id AND pc.contract_id = cf.id AND c.id=? AND cf.id=?;";
+        $sql = "SELECT c.gender, ch.processing_fee_word, ch.processing_fee, ch.payment_term, c.customer_ctc_place, c.customer_ctc_date, c.customer_ctc, c.customer_valid_id, c.email, c.contact_no, ch.pagibig_interest_word, ch.pagibig_interest, CONCAT(u.firstname, ' ', u.lastname) AS full_name, c.customer_name, c.civil_status, c.legality, c.citizenship, ch.net_selling_price_word, ch.net_selling_price, ch.unit_no, ch.condo_type, ch.unit_floor, ch.unit_floor_sup, ch.unit_floor_area, ch.witness_a, ch.witness_b,c.customer_address, cf.contract_name,cf.contract_file FROM maindb.users u, idsdb.customer_tbl c, idsdb.customer_house_tbl ch, idsdb.project_contract_tbl pc, idsdb.contract_files_tbl cf WHERE c.created_by = u.id AND c.id=ch.customer_id AND ch.project_id = pc.project_id AND pc.contract_id = cf.id AND c.id=? AND cf.id=?;";
         $print_contract_monitoring = $this->conn->prepare($sql);
 
         $print_contract_monitoring->bindParam(1, $this->customer_id);

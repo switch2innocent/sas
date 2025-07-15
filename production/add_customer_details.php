@@ -237,7 +237,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             <table class="table table-bordered" style="margin-bottom:0;">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th style="width:20%;">Customer Code <span style="color:red">*</span></th>
+                                                                        <th style="width:20%;">Customer Code</th>
                                                                         <td>
                                                                             <?php
                                                                             $increment_customer_code = new Customer($db);
@@ -252,15 +252,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                                 $customer_code = "A-0001"; //Default value
                                                                             }
                                                                             ?>
-                                                                            <input type="text" class="form-control" id="customer_code" name="customer_code" value="<?php echo htmlspecialchars($customer_code); ?>" required readonly>
+                                                                            <input type="text" class="form-control" id="customer_code" name="customer_code" value="<?php echo htmlspecialchars($customer_code); ?>" readonly>
                                                                         </td>
-                                                                        <th style="width:20%;">Customer Name</th>
+                                                                        <th style="width:20%;">Customer Name <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <input type="text" class="form-control" id="customer_name" name="customer_name">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Customer Address</th>
+                                                                        <th>Customer Address <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <input type="text" class="form-control" id="customer_address" name="customer_address">
                                                                         </td>
@@ -290,7 +290,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Civil Status</th>
+                                                                        <th>Civil Status <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <select class="form-control" id="civil_status" name="civil_status">
                                                                                 <option value="0" selected disabled>Choose...</option>
@@ -327,13 +327,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                         <td>
                                                                             <input type="text" class="form-control" id="company" name="company">
                                                                         </td>
-                                                                        <th>Contact No</th>
+                                                                        <th>Contact No. <span style="color: red">*</span></th>
                                                                         <td>
-                                                                            <input type="tel" class="form-control" id="contact_no" name="contact_no" maxlength="11" placeholder="e.g. 09171234567">
+                                                                            <input type="tel" class="form-control" id="contact_no" maxlength="11" pattern="09\d{9}" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="e.g. 09171234567" title="Enter an 11-digit phone number starting with 09">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Gender</th>
+                                                                        <th>Gender <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <select class="form-control" id="gender" name="gender">
                                                                                 <option value="0" selected disabled>Choose...</option>
@@ -389,9 +389,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Income</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="income" name="income">
+                                                                            <input type="text" class="form-control currency_format" id="income" name="income">
                                                                         </td>
-                                                                        <th>Birthdate</th>
+                                                                        <th>Birthdate <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <input type="date" class="form-control" id="birthdate" name="birthdate">
                                                                         </td>
@@ -426,7 +426,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             <table class="table table-bordered" style="margin-bottom:0;">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th style="width:20%;">Project <span style="color:red">*</span></th>
+                                                                        <th style="width:20%;">Project <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <select class="form-control" id="project_id" name="project">
                                                                                 <option value="0" selected disabled>Choose...</option>
@@ -490,9 +490,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                         <td>
                                                                             <input type="text" class="form-control" id="unit_floor" name="unit_floor">
                                                                         </td>
-                                                                        <th>Unit Floor SUP</th>
+                                                                        <!-- <th>Unit Floor SUP</th>
                                                                         <td>
                                                                             <input type="text" class="form-control" id="unit_floor_sup" name="unit_floor_sup">
+                                                                        </td> -->
+
+                                                                        <!-- Newly added -->
+                                                                        <th>Unit Title No. <sup style="color: green;">New</sup></th>
+                                                                        <td>
+                                                                            <input type="text" class="form-control" id="unit_title_no" name="unit_title_no">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -515,14 +521,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                             <input type="text" class="form-control" id="parking_floor" name="parking_floor">
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <!-- removed -->
+                                                                    <!-- <tr>
                                                                         <th>Parking Floor SUP</th>
                                                                         <td>
                                                                             <input type="text" class="form-control" id="parking_floor_sup" name="parking_floor_sup">
                                                                         </td>
                                                                         <th></th>
                                                                         <td></td>
-                                                                    </tr>
+                                                                    </tr> -->
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -546,7 +553,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th style="width:25%;">Net Selling Price</th>
                                                                         <td style="width:25%;">
-                                                                            <input type="number" class="form-control" id="net_selling_price" name="net_selling_price" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format" id="net_selling_price" name="net_selling_price" placeholder="0.00">
                                                                         </td>
                                                                         <th style="width:20%;">Net Selling Price (in Words)</th>
                                                                         <td style="width:30%;">
@@ -556,7 +563,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th style="width:25%;">Equity</th>
                                                                         <td style="width:25%;">
-                                                                            <input type="number" class="form-control" id="equity" name="equity" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format" id="equity" name="equity" placeholder="0.00">
                                                                         </td>
                                                                         <th style="width:20%;">Equity (in Words)</th>
                                                                         <td style="width:30%;">
@@ -576,7 +583,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Loan Amount</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="loan_amount" name="loan_amount" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format" id="loan_amount" name="loan_amount" placeholder="0.00">
                                                                         </td>
                                                                         <th>Loan Amount (in Words)</th>
                                                                         <td>
@@ -586,7 +593,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Loan Term</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="loan_term" name="loan_term" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format" id="loan_term" name="loan_term" placeholder="0.00">
                                                                         </td>
                                                                         <th>Loan Term (in Words)</th>
                                                                         <td>
@@ -596,7 +603,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Pagibig Interest</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="pagibig_interest" name="pagibig_interest" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format" id="pagibig_interest" name="pagibig_interest" placeholder="0.00">
                                                                         </td>
                                                                         <th>Pagibig Interest (in Words)</th>
                                                                         <td>
@@ -606,7 +613,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Parking NSP</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="parking_nsp" name="parking_nsp" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format" id="parking_nsp" name="parking_nsp" placeholder="0.00">
                                                                         </td>
                                                                         <th>Parking NSP (in Words)</th>
                                                                         <td>
@@ -616,7 +623,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Processing Fee</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="processing_fee" name="processing_fee" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format" id="processing_fee" name="processing_fee" placeholder="0.00">
                                                                         </td>
                                                                         <th>Processing Fee (in Words)</th>
                                                                         <td>
@@ -626,27 +633,27 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Regfees</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="regfees" name="regfees" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="regfees" name="regfees" placeholder="0.00">
                                                                         </td>
                                                                         <th>Admin Fee</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="admin_fee" name="admin_fee" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="admin_fee" name="admin_fee" placeholder="0.00">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Additional Work</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="additional_work" name="additional_work" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="additional_work" name="additional_work" placeholder="0.00">
                                                                         </td>
                                                                         <th>Transfer Tax</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="transfer_tax" name="transfer_tax" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="transfer_tax" name="transfer_tax" placeholder="0.00">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Docstamp Tax</th>
                                                                         <td>
-                                                                            <input type="number" class="form-control" id="docstamp_tax" name="docstamp_tax" placeholder="0.00">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="docstamp_tax" name="docstamp_tax" placeholder="0.00">
                                                                         </td>
                                                                         <th></th>
                                                                         <td></td>

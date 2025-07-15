@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once '../vendor/autoload.php';
 require_once '../config/dbconn.php';
 require_once '../objects/contract_titling_monitoring.obj.php';
@@ -67,7 +69,19 @@ if ($download->rowCount() > 0) {
     $template->setValue('witness_b', htmlspecialchars($row['witness_b']));
     $template->setValue('contract_name', htmlspecialchars($row['contract_name']));
     $template->setValue('current_datetime', htmlspecialchars($current_datetime));
-    $template->setValue('full_name', htmlspecialchars($row['full_name']));
+    $template->setValue('pagibig_interest', htmlspecialchars($row['pagibig_interest']));
+    $template->setValue('pagibig_interest_word', htmlspecialchars($row['pagibig_interest_word']));
+    $template->setValue('contact_no', htmlspecialchars($row['contact_no']));
+    $template->setValue('email', htmlspecialchars($row['email']));
+    $template->setValue('customer_valid_id', htmlspecialchars($row['customer_valid_id']));
+    $template->setValue('customer_ctc', htmlspecialchars($row['customer_ctc']));
+    $template->setValue('customer_ctc_date', htmlspecialchars($row['customer_ctc_date']));
+    $template->setValue('customer_ctc_place', htmlspecialchars($row['customer_ctc_place']));
+    $template->setValue('payment_term', htmlspecialchars($row['payment_term']));
+    $template->setValue('gender', htmlspecialchars($row['gender']));
+    $template->setValue('processing_fee', htmlspecialchars($row['processing_fee']));
+    $template->setValue('processing_fee_word', htmlspecialchars($row['processing_fee_word']));
+    $template->setValue('full_name', $_SESSION['fullname']);
 
     //For signatories details
     $template->setValue('company_person1', htmlspecialchars($row2['company_person1']));
@@ -101,3 +115,9 @@ if ($download->rowCount() > 0) {
 } else {
     echo "No contract file found with the provided ID.";
 }
+
+
+
+
+// $customerName = str_replace('-', ' AND ', $row['customer_name']);
+// $template->setValue('customer_name', htmlspecialchars($customerName));

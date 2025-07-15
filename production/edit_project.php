@@ -176,6 +176,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
+                                    <p><strong>NOTE</strong>: Fields marked with a red asterisk (<span style="color: red">*</span>) are required. Please complete them before submitting.</p>
+                                    <br>
 
                                     <?php
                                     $edit_project = new Project($db);
@@ -193,13 +195,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                         <!-- Column 1 -->
                                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="upd_project_code">Project Code <span style="color:red">*</span></label>
+                                                                <label for="upd_project_code">Project Code</label>
                                                                 <input type="text" id="upd_project_id" name="upd_project_id" value="' . $row['id'] . '" hidden>
-                                                                <input type="text" class="form-control" id="upd_project_code" name="upd_project_code" value="' . $row['project_code'] . '" required readonly>
+                                                                <input type="text" class="form-control" id="upd_project_code" name="upd_project_code" value="' . $row['project_code'] . '" readonly>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="upd_company_code">Company Code <span style="color:red">*</span></label>
-                                                                <select class="form-control" id="upd_company_code" required>
+                                                                <select class="form-control" id="upd_company_code">
                                                                 <option value="' . (int)$row['company_id'] . '" disabled selected>' . $row['company_code'] . '</option>
                                                                 ';
                                         $view_company = new Company($db);
@@ -215,10 +217,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="upd_project_name">Project Name <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="upd_project_name" name="upd_project_name" value="' . $row['project_name'] . '" required>
+                                                                <input type="text" class="form-control" id="upd_project_name" name="upd_project_name" value="' . $row['project_name'] . '">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="upd_condo">Condo <span style="color:red">*</span></label>
+                                                                <label for="upd_condo">Condo</label>
                                                                 <div class="custom-control custom-switch">
                                                                     <input type="checkbox" class="custom-control-input" id="upd_condo" name="upd_condo" value="' . $row['condo'] . '" ' . ($row['condo'] == 1 ? ' checked' : '') . '>
                                                                     <label class="custom-control-label" for="condo">Yes</label>
@@ -229,30 +231,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                                             <div class="form-group">
                                                                 <label for="upd_location">Location <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="upd_location" name="upd_location" value="' . $row['location'] . '" required>
+                                                                <input type="text" class="form-control" id="upd_location" name="upd_location" value="' . $row['location'] . '">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="upd_city">City <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="upd_city" name="upd_city" value="' . $row['city'] . '" required>
+                                                                <label for="upd_city">City</label>
+                                                                <input type="text" class="form-control" id="upd_city" name="upd_city" value="' . $row['city'] . '">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="upd_province">Province <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="upd_province" name="upd_province" value="' . $row['province'] . '" required>
+                                                                <label for="upd_province">Province</label>
+                                                                <input type="text" class="form-control" id="upd_province" name="upd_province" value="' . $row['province'] . '">
                                                             </div>
                                                         </div>
                                                         <!-- Column 3 -->
                                                         <div class="col-md-4 col-sm-12 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="upd_association">Association <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="upd_association" name="upd_association" value="' . $row['association'] . '" required>
+                                                                <label for="upd_association">Association</label>
+                                                                <input type="text" class="form-control" id="upd_association" name="upd_association" value="' . $row['association'] . '">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="upd_registry">Registry <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="upd_registry" name="upd_registry" value="' . $row['registry'] . '" required>
+                                                                <label for="upd_registry">Registry</label>
+                                                                <input type="text" class="form-control" id="upd_registry" name="upd_registry" value="' . $row['registry'] . '">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="upd_project_tct_no">Project TCT No <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="upd_project_tct_no" name="upd_project_tct_no" value="' . $row['project_tct_no'] . '" required>
+                                                                <label for="upd_project_tct_no">Project TCT No</label>
+                                                                <input type="text" class="form-control" id="upd_project_tct_no" name="upd_project_tct_no" value="' . $row['project_tct_no'] . '">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -269,14 +271,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                             echo '
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="upd_contract_remarks_' . $i . '">Remarks ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="upd_contract_remarks_' . $i . '" name="upd_contract_remarks_' . $i . '" value="' . $row['contract_remarks_' . $i . ''] . '" required>
+                                                                    <label for="upd_contract_remarks_' . $i . '">Remarks ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="upd_contract_remarks_' . $i . '" name="upd_contract_remarks_' . $i . '" value="' . $row['contract_remarks_' . $i . ''] . '">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="upd_contract_date_' . $i . '">Date ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="upd_contract_date_' . $i . '" name="upd_contract_date_' . $i . '" value="' . $row['contract_date_' . $i . ''] . '" required>
+                                                                    <label for="upd_contract_date_' . $i . '">Date ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="upd_contract_date_' . $i . '" name="upd_contract_date_' . $i . '" value="' . $row['contract_date_' . $i . ''] . '">
                                                                 </div>
                                                             </div>
                                                         ';
@@ -296,14 +298,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                             echo '
                                                          <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="upd_pagibig_remarks_' . $i . '">Remarks ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="upd_pagibig_remarks_' . $i . '" name="upd_pagibig_remarks_' . $i . '" value="' . $row['pagibig_remarks_' . $i . ''] . '" required>
+                                                                    <label for="upd_pagibig_remarks_' . $i . '">Remarks ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="upd_pagibig_remarks_' . $i . '" name="upd_pagibig_remarks_' . $i . '" value="' . $row['pagibig_remarks_' . $i . ''] . '">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="upd_pagibig_date_' . $i . '">Date ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="upd_pagibig_date_' . $i . '" name="upd_pagibig_date_' . $i . '" value="' . $row['pagibig_date_' . $i . ''] . '" required>
+                                                                    <label for="upd_pagibig_date_' . $i . '">Date ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="upd_pagibig_date_' . $i . '" name="upd_pagibig_date_' . $i . '" value="' . $row['pagibig_date_' . $i . ''] . '">
                                                                 </div>
                                                             </div>
                                                         ';
@@ -323,14 +325,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                             echo '
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="upd_titling_remarks_' . $i . '">Remarks ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="upd_titling_remarks_' . $i . '" name="upd_titling_remarks_' . $i . '" value="' . $row['titling_remarks_' . $i . ''] . '" required>
+                                                                    <label for="upd_titling_remarks_' . $i . '">Remarks ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="upd_titling_remarks_' . $i . '" name="upd_titling_remarks_' . $i . '" value="' . $row['titling_remarks_' . $i . ''] . '">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="upd_titling_date_' . $i . '">Date ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="upd_titling_date_' . $i . '" name="upd_titling_date_' . $i . '" value="' . $row['titling_date_' . $i . ''] . '" required>
+                                                                    <label for="upd_titling_date_' . $i . '">Date ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="upd_titling_date_' . $i . '" name="upd_titling_date_' . $i . '" value="' . $row['titling_date_' . $i . ''] . '">
                                                                 </div>
                                                             </div>
                                                         ';
@@ -342,13 +344,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                                             <!-- Contracts -->
                                             <div class="panel panel-default">
-                                                <div class="panel-heading"><strong>Contracts</strong></div>
+                                              <div class="panel-heading"><strong><span class="fa fa-folder-open"></span> Contracts</strong> <span style="color:red">*</span>
+                                                <p><strong>NOTE</strong>: Select the contracts that should be assigned to this project. Only checked contracts will be linked.</p>
+                                            </div>
                                                 <div class="panel-body">
-                                                    <p><strong>NOTE</strong>: Select the contracts that should be assigned to this project. Only checked contracts will be linked.</p>
                                                     <div class="row">
-                                                     <div style="max-height: 250px; overflow-y: auto;">
-                                                        <table class="table table-bordered">
-                                                       <thead style="position: sticky; top: 0; background: #fff; z-index: 2; background-color: #f5f5f5;">
+                                                         <table id="datatable" class="table table-bordered table-striped">
+                                                        <thead>
                                                             <tr>
                                                                 <th class="text-center"><input type="checkbox" id="check_all"></th>
                                                                 <th class="text-center">Contract Name</th>
@@ -376,13 +378,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                     <td class="text-center">
                                                         <input type="checkbox" name="contract_id" class="checklist" value="' . htmlspecialchars($row2['id']) . '" ' . $isChecked . '>
                                                     </td>
-                                                    <td class="text-center">' . htmlspecialchars($row2['contract_name']) . '</td>
+                                                    <td>' . htmlspecialchars($row2['contract_name']) . '</td>
                                                 </tr>';
                                         }
 
                                         echo '</tbody>
                                                         </table>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

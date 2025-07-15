@@ -49,13 +49,14 @@ class ContractFile
 
     public function update_contract_files()
     {
-        $sql = "UPDATE contract_files_tbl SET contract_name=?, contract_file=?, contract_type_id=? WHERE id=?";
+        $sql = "UPDATE contract_files_tbl SET contract_name=?, contract_file=?, contract_type_id=?, updated_by=?, date_updated=NOW() WHERE id=?";
         $update_contract_file = $this->conn->prepare($sql);
 
         $update_contract_file->bindParam(1, $this->contract_name);
         $update_contract_file->bindParam(2, $this->contract_file, PDO::PARAM_LOB);
         $update_contract_file->bindParam(3, $this->contract_type_id);
-        $update_contract_file->bindParam(4, $this->id);
+        $update_contract_file->bindParam(4, $this->updated_by);
+        $update_contract_file->bindParam(5, $this->id);
 
         if ($update_contract_file->execute()) {
             return true;
@@ -80,7 +81,7 @@ class ContractFile
 
     public function download_contract_files()
     {
-        $sql = "SELECT contract_file FROM contract_files_tbl WHERE id = ?";
+        $sql = "SELECT contract_file, contract_name FROM contract_files_tbl WHERE id = ?";
         $download_contract_file = $this->conn->prepare($sql);
 
         $download_contract_file->bindParam(1, $this->id, PDO::PARAM_INT);

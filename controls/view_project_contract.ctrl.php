@@ -90,14 +90,14 @@ while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
         echo '
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="contract_remarks_' . $i . '">Remarks ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="contract_remarks_' . $i . '" name="contract_remarks_' . $i . '" value="' . $row['contract_remarks_' . $i . ''] . '" required>
+                                                                    <label for="contract_remarks_' . $i . '">Remarks ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="contract_remarks_' . $i . '" name="contract_remarks_' . $i . '" value="' . $row['contract_remarks_' . $i . ''] . '" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="contract_date_' . $i . '">Date ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="contract_date_' . $i . '" name="contract_date_' . $i . '" value="' . $row['contract_date_' . $i . ''] . '" required>
+                                                                    <label for="contract_date_' . $i . '">Date ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="contract_date_' . $i . '" name="contract_date_' . $i . '" value="' . $row['contract_date_' . $i . ''] . '" readonly>
                                                                 </div>
                                                             </div>
                                                         ';
@@ -116,14 +116,14 @@ while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
         echo '
                                                          <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="pagibig_remarks_' . $i . '">Remarks ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="pagibig_remarks_' . $i . '" name="pagibig_remarks_' . $i . '" value="' . $row['pagibig_remarks_' . $i . ''] . '" required>
+                                                                    <label for="pagibig_remarks_' . $i . '">Remarks ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="pagibig_remarks_' . $i . '" name="pagibig_remarks_' . $i . '" value="' . $row['pagibig_remarks_' . $i . ''] . '" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="pagibig_date_' . $i . '">Date ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="pagibig_date_' . $i . '" name="pagibig_date_' . $i . '" value="' . $row['pagibig_date_' . $i . ''] . '" required>
+                                                                    <label for="pagibig_date_' . $i . '">Date ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="pagibig_date_' . $i . '" name="pagibig_date_' . $i . '" value="' . $row['pagibig_date_' . $i . ''] . '" readonly>
                                                                 </div>
                                                             </div>
                                                         ';
@@ -142,14 +142,14 @@ while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
         echo '
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="titling_remarks_' . $i . '">Remarks ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="titling_remarks_' . $i . '" name="titling_remarks_' . $i . '" value="' . $row['titling_remarks_' . $i . ''] . '" required>
+                                                                    <label for="titling_remarks_' . $i . '">Remarks ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="titling_remarks_' . $i . '" name="titling_remarks_' . $i . '" value="' . $row['titling_remarks_' . $i . ''] . '" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <label for="titling_date_' . $i . '">Date ' . $i . ' <span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" id="titling_date_' . $i . '" name="titling_date_' . $i . '" value="' . $row['titling_date_' . $i . ''] . '" required>
+                                                                    <label for="titling_date_' . $i . '">Date ' . $i . '</label>
+                                                                    <input type="text" class="form-control" id="titling_date_' . $i . '" name="titling_date_' . $i . '" value="' . $row['titling_date_' . $i . ''] . '" readonly>
                                                                 </div>
                                                             </div>
                                                         ';

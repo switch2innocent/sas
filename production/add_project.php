@@ -178,7 +178,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <div class="x_content">
 
                                     <!-- Add Project Form -->
-                                    <p>Please fill in all required fields below. Enter "NA" if a field does not apply.</p>
+                                    <p><strong>NOTE</strong>: Fields marked with a red asterisk (<span style="color: red">*</span>) are required. Please complete them before submitting.</p>
                                     <br>
                                     <form>
                                         <div class="panel panel-default">
@@ -201,8 +201,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                 $proj_code = "S-0001"; // Default value if no records exist
                                                             }
                                                             ?>
-                                                            <label for="project_code">Project Code <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="project_code" name="project_code" value="<?php echo htmlspecialchars($proj_code); ?>" required readonly>
+                                                            <label for="project_code">Project Code</label>
+                                                            <input type="text" class="form-control" id="project_code" name="project_code" value="<?php echo htmlspecialchars($proj_code); ?>" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="company_code">Company Code <span style="color:red">*</span></label>
@@ -220,12 +220,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="project_name">Project Name <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="project_name" name="project_name" required>
+                                                            <input type="text" class="form-control" id="project_name" name="project_name">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="condo">Condo <span style="color:red">*</span></label>
+                                                            <label for="condo">Condo</label>
                                                             <div class="custom-control custom-switch">
-                                                                <input type="checkbox" class="custom-control-input" id="condo" name="condo" required>
+                                                                <input type="checkbox" class="custom-control-input" id="condo" name="condo">
                                                                 <label class="custom-control-label" for="condo">Yes</label>
                                                             </div>
                                                         </div>
@@ -234,30 +234,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="location">Location <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="location" name="location" required>
+                                                            <input type="text" class="form-control" id="location" name="location">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="city">City <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="city" name="city" required>
+                                                            <label for="city">City</label>
+                                                            <input type="text" class="form-control" id="city" name="city">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="province">Province <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="province" name="province" required>
+                                                            <label for="province">Province</label>
+                                                            <input type="text" class="form-control" id="province" name="province">
                                                         </div>
                                                     </div>
                                                     <!-- Column 3 -->
                                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                                         <div class="form-group">
-                                                            <label for="association">Association <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="association" name="association" required>
+                                                            <label for="association">Association</label>
+                                                            <input type="text" class="form-control" id="association" name="association">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="registry">Registry <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="registry" name="registry" required>
+                                                            <label for="registry">Registry</label>
+                                                            <input type="text" class="form-control" id="registry" name="registry">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="project_tct_no">Project TCT No <span style="color:red">*</span></label>
-                                                            <input type="text" class="form-control" id="project_tct_no" name="project_tct_no" required>
+                                                            <label for="project_tct_no">Project TCT No</label>
+                                                            <input type="text" class="form-control" id="project_tct_no" name="project_tct_no">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,14 +272,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="contract_remarks_<?php echo $i; ?>">Remarks <?php echo $i; ?> <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="contract_remarks_<?php echo $i; ?>" name="contract_remarks_<?php echo $i; ?>" required>
+                                                                <label for="contract_remarks_<?php echo $i; ?>">Remarks <?php echo $i; ?></label>
+                                                                <input type="text" class="form-control" id="contract_remarks_<?php echo $i; ?>" name="contract_remarks_<?php echo $i; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="contract_date_<?php echo $i; ?>">Date <?php echo $i; ?> <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="contract_date_<?php echo $i; ?>" name="contract_date_<?php echo $i; ?>" required>
+                                                                <label for="contract_date_<?php echo $i; ?>">Date <?php echo $i; ?></label>
+                                                                <input type="text" class="form-control" id="contract_date_<?php echo $i; ?>" name="contract_date_<?php echo $i; ?>">
                                                             </div>
                                                         </div>
                                                     <?php endfor; ?>
@@ -295,14 +295,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="pagibig_remarks_<?php echo $i; ?>">Remarks <?php echo $i; ?> <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="pagibig_remarks_<?php echo $i; ?>" name="pagibig_remarks_<?php echo $i; ?>" required>
+                                                                <label for="pagibig_remarks_<?php echo $i; ?>">Remarks <?php echo $i; ?></label>
+                                                                <input type="text" class="form-control" id="pagibig_remarks_<?php echo $i; ?>" name="pagibig_remarks_<?php echo $i; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="pagibig_date_<?php echo $i; ?>">Date <?php echo $i; ?> <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="pagibig_date_<?php echo $i; ?>" name="pagibig_date_<?php echo $i; ?>" required>
+                                                                <label for="pagibig_date_<?php echo $i; ?>">Date <?php echo $i; ?></label>
+                                                                <input type="text" class="form-control" id="pagibig_date_<?php echo $i; ?>" name="pagibig_date_<?php echo $i; ?>">
                                                             </div>
                                                         </div>
                                                     <?php endfor; ?>
@@ -318,14 +318,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                     <?php for ($i = 1; $i <= 5; $i++) : ?>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="titling_remarks_<?php echo $i; ?>">Remarks <?php echo $i; ?> <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="titling_remarks_<?php echo $i; ?>" name="titling_remarks_<?php echo $i; ?>" required>
+                                                                <label for="titling_remarks_<?php echo $i; ?>">Remarks <?php echo $i; ?></label>
+                                                                <input type="text" class="form-control" id="titling_remarks_<?php echo $i; ?>" name="titling_remarks_<?php echo $i; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label for="titling_date_<?php echo $i; ?>">Date <?php echo $i; ?> <span style="color:red">*</span></label>
-                                                                <input type="text" class="form-control" id="titling_date_<?php echo $i; ?>" name="titling_date_<?php echo $i; ?>" required>
+                                                                <label for="titling_date_<?php echo $i; ?>">Date <?php echo $i; ?></label>
+                                                                <input type="text" class="form-control" id="titling_date_<?php echo $i; ?>" name="titling_date_<?php echo $i; ?>">
                                                             </div>
                                                         </div>
                                                     <?php endfor; ?>
@@ -335,34 +335,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                                         <!-- Contracts -->
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"><strong><span class="fa fa-folder-open"></span> Contracts</strong></div>
-                                            <div class="panel-body">
+                                            <div class="panel-heading"><strong><span class="fa fa-folder-open"></span> Contracts</strong> <span style="color:red">*</span>
                                                 <p><strong>NOTE</strong>: Select the contracts that should be assigned to this project. Only checked contracts will be linked.</p>
+                                            </div>
+                                            <div class="panel-body">
                                                 <div class="row">
-                                                    <div style="max-height: 250px; overflow-y: auto;">
-                                                        <table class="table table-bordered">
-                                                            <thead style="position: sticky; top: 0; background: #fff; z-index: 2; background-color: #f5f5f5;">
-                                                                <tr>
-                                                                    <th class="text-center"><input type="checkbox" id="check_all"></th>
-                                                                    <th class="text-center">Contract Name</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-                                                                $view_contract_file = new ContractFile($db);
-                                                                $view = $view_contract_file->view_contract_files();
-                                                                while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
-                                                                    echo '
+                                                    <table id="datatable" class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center"><input type="checkbox" id="check_all"></th>
+                                                                <th class="text-center">Contract Name</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $view_contract_file = new ContractFile($db);
+                                                            $view = $view_contract_file->view_contract_files();
+                                                            while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
+                                                                echo '
                                                                         <tr>
                                                                             <td class="text-center"><input type="checkbox" name="contract_id" class="checklist" value="' . $row['id'] . '"></td>
-                                                                            <td class="text-center">' . htmlspecialchars($row['contract_name']) . '</td>
+                                                                            <td>' . htmlspecialchars($row['contract_name']) . '</td>
                                                                         </tr>
                                                                     ';
-                                                                }
-                                                                ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
                                                     </table>
                                                 </div>
                                             </div>

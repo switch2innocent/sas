@@ -161,7 +161,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div class="x_content">
 
                   <!-- Add Company Form -->
-                  <p>Please fill in all required fields below. Enter "NA" if a field does not apply.</p>
+                  <p><strong>NOTE</strong>: Fields marked with a red asterisk (<span style="color: red">*</span>) are required. Please complete them before submitting.</p>
                   <br>
                   <form>
                     <div class="panel panel-default">
@@ -171,43 +171,43 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="company_code">Company Code <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="company_code" name="company_code" required>
+                              <input type="text" class="form-control" id="company_code" name="company_code">
                             </div>
                             <div class="form-group">
                               <label for="company_name">Company Name <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="company_name" name="company_name" required>
+                              <input type="text" class="form-control" id="company_name" name="company_name">
                             </div>
                             <div class="form-group">
                               <label for="company_address">Company Address <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="company_address" name="company_address" required>
+                              <input type="text" class="form-control" id="company_address" name="company_address">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="city_notary">City Notary <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="city_notary" name="city_notary" required>
+                              <label for="city_notary">City Notary</label>
+                              <input type="text" class="form-control" id="city_notary" name="city_notary">
                             </div>
                             <div class="form-group">
-                              <label for="company_city">Company City <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="company_city" name="company_city" required>
+                              <label for="company_city">Company City</label>
+                              <input type="text" class="form-control" id="company_city" name="company_city">
                             </div>
                             <div class="form-group">
-                              <label for="company_tin">Company TIN <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="company_tin" name="company_tin" required>
+                              <label for="company_tin">Company TIN</label>
+                              <input type="text" class="form-control" id="company_tin" name="company_tin">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="company_ctc">Company CTC <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="company_ctc" name="company_ctc" required>
+                              <label for="company_ctc">Company CTC</label>
+                              <input type="text" class="form-control" id="company_ctc" name="company_ctc">
                             </div>
                             <div class="form-group">
-                              <label for="company_ctc_date">Company CTC Date <span style="color:red">*</span></label>
-                              <input type="date" class="form-control" id="company_ctc_date" name="company_ctc_date" required>
+                              <label for="company_ctc_date">Company CTC Date</label>
+                              <input type="date" class="form-control" id="company_ctc_date" name="company_ctc_date">
                             </div>
                             <div class="form-group">
-                              <label for="company_ctc_place">Company CTC Place <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="company_ctc_place" name="company_ctc_place" required>
+                              <label for="company_ctc_place">Company CTC Place</label>
+                              <input type="text" class="form-control" id="company_ctc_place" name="company_ctc_place">
                             </div>
                           </div>
                         </div>
@@ -215,7 +215,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
 
                     <div class="panel panel-default">
-                      <div class="panel-heading"><strong><span class="fa fa-user"></span> Company Personnels</strong></div>
+                      <div class="panel-heading"><strong><span class="fa fa-users"></span> Company Personnels</strong></div>
                       <div class="panel-body">
                         <div class="row">
                           <!-- Personnel A -->
@@ -223,24 +223,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <fieldset style="border:1px solid #ddd; padding:15px; border-radius:10px;">
                               <legend style="font-size:16px; font-weight:bold;"><span class="fa fa-user"></span> Personnel A</legend>
                               <div class="form-group">
-                                <label for="company_person_a">Company Person <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="company_person_a" name="company_person_a" required>
+                                <label for="company_person_a">Company Person</label>
+                                <input type="text" class="form-control" id="company_person_a" name="company_person_a">
                               </div>
                               <div class="form-group">
-                                <label for="company_position_a">Company Position <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="company_position_a" name="company_position_a" required>
+                                <label for="company_position_a">Company Position</label>
+                                <input type="text" class="form-control" id="company_position_a" name="company_position_a">
                               </div>
                               <div class="form-group">
-                                <label for="company_person_tin_a">Company Person TIN <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="company_person_tin_a" name="company_person_tin_a" required>
+                                <label for="company_person_tin_a">Company Person TIN</label>
+                                <input type="text" class="form-control" id="company_person_tin_a" name="company_person_tin_a">
                               </div>
                               <div class="form-group">
-                                <label for="person_ctc_a">Person CTC <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="person_ctc_a" name="person_ctc_a" required>
+                                <label for="person_ctc_a">Person CTC</label>
+                                <input type="text" class="form-control" id="person_ctc_a" name="person_ctc_a">
                               </div>
                               <div class="form-group">
-                                <label for="person_ctc_date_place_a">Person CTC Date Place <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="person_ctc_date_place_a" name="person_ctc_date_place_a" required>
+                                <label for="person_ctc_date_place_a">Person CTC Date Place</label>
+                                <input type="text" class="form-control" id="person_ctc_date_place_a" name="person_ctc_date_place_a">
                               </div>
                             </fieldset>
                           </div>
@@ -249,24 +249,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <fieldset style="border:1px solid #ddd; padding:15px; border-radius:10px;">
                               <legend style="font-size:16px; font-weight:bold;"><span class="fa fa-user"></span> Personnel B</legend>
                               <div class="form-group">
-                                <label for="company_person_b">Company Name <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="company_person_b" name="company_person_b" required>
+                                <label for="company_person_b">Company Name</label>
+                                <input type="text" class="form-control" id="company_person_b" name="company_person_b">
                               </div>
                               <div class="form-group">
-                                <label for="company_position_b">Company Position <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="company_position_b" name="company_position_b" required>
+                                <label for="company_position_b">Company Position</label>
+                                <input type="text" class="form-control" id="company_position_b" name="company_position_b">
                               </div>
                               <div class="form-group">
-                                <label for="company_person_tin_b">Company Person TIN <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="company_person_tin_b" name="company_person_tin_b" required>
+                                <label for="company_person_tin_b">Company Person TIN</label>
+                                <input type="text" class="form-control" id="company_person_tin_b" name="company_person_tin_b">
                               </div>
                               <div class="form-group">
-                                <label for="person_ctc_b">Person CTC <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="person_ctc_b" name="person_ctc_b" required>
+                                <label for="person_ctc_b">Person CTC</label>
+                                <input type="text" class="form-control" id="person_ctc_b" name="person_ctc_b">
                               </div>
                               <div class="form-group">
-                                <label for="person_ctc_date_place_b">Person CTC Date Place <span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="person_ctc_date_place_b" name="person_ctc_date_place_b" required>
+                                <label for="person_ctc_date_place_b">Person CTC Date Place</label>
+                                <input type="text" class="form-control" id="person_ctc_date_place_b" name="person_ctc_date_place_b">
                               </div>
                             </fieldset>
                           </div>
@@ -275,25 +275,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
 
                     <div class="panel panel-default">
-                      <div class="panel-heading"><strong><span class="fa fa-users"></span> Pag-Ibig Personnel</strong></div>
+                      <div class="panel-heading"><strong><span class="fa fa-user"></span> Pag-Ibig Personnel</strong></div>
                       <div class="panel-body">
                         <div class="row">
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="pagibig_person">Pag-Ibig Person <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pagibig_person" name="pagibig_person" required>
+                              <label for="pagibig_person">Pag-Ibig Person</label>
+                              <input type="text" class="form-control" id="pagibig_person" name="pagibig_person">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="pagibig_address">Pag-Ibig Address <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pagibig_address" name="pagibig_address" required>
+                              <label for="pagibig_address">Pag-Ibig Address</label>
+                              <input type="text" class="form-control" id="pagibig_address" name="pagibig_address">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="pagibig_position">Pag-Ibig Position <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pagibig_position" name="pagibig_position" required>
+                              <label for="pagibig_position">Pag-Ibig Position</label>
+                              <input type="text" class="form-control" id="pagibig_position" name="pagibig_position">
                             </div>
                           </div>
                         </div>

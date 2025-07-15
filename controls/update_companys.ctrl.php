@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once '../config/dbconn.php';
 require_once '../objects/company.obj.php';
@@ -31,6 +32,7 @@ $update_company->person_ctc_date_place_b = $_POST['person_ctc_date_place_b'];
 $update_company->pagibig_person = $_POST['pagibig_person'];
 $update_company->pagibig_address = $_POST['pagibig_address'];
 $update_company->pagibig_position = $_POST['pagibig_position'];
+$update_company->updated_by = $_SESSION['user_id'];
 
 $update = $update_company->update_companys();
 

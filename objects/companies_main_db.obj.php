@@ -12,7 +12,7 @@ class CompaniesMainDB
 
     public function get_companies()
     {
-        $sql = "SELECT id, comp_name FROM companies WHERE status=1";
+        $sql = "SELECT id, comp_name FROM companies WHERE id IN (1, 3) AND status=1";
         $get_company = $this->conn->prepare($sql);
 
         $get_company->execute();

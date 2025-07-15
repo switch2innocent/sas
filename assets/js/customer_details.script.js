@@ -1,3 +1,18 @@
+//Added superscipt
+const superscriptMap = {
+    'st': 'ˢᵗ',
+    'nd': 'ⁿᵈ',
+    'rd': 'ʳᵈ',
+    'th': 'ᵗʰ'
+};
+
+function formatOrdinal(text) {
+    return text.replace(/\b(\d+)(st|nd|rd|th)\b/gi, (match, num, suffix) => {
+        const sup = superscriptMap[suffix.toLowerCase()] || suffix;
+        return `${num}${sup}`;
+    });
+}
+
 //Function for num to words
 function numberToWords(n) {
     const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
@@ -13,9 +28,14 @@ function numberToWords(n) {
     let i = 0;
 
     while (n > 0) {
+        if (i >= thousands.length) {
+            throw new Error("Number too large to convert");
+        }
+
         let chunk = n % 1000;
         if (chunk !== 0) {
-            word = helper(chunk) + thousands[i] + " " + word;
+            let chunkWord = helper(chunk).trim();
+            word = chunkWord + " " + thousands[i] + (word ? " " + word : "");
         }
         n = Math.floor(n / 1000);
         i++;
@@ -59,13 +79,73 @@ function convertToPesosCentavosWords(amount) {
         words += numberToWords(centavos) + " centavos";
     }
 
-    return words.charAt(0).toUpperCase() + words.slice(1);
+    if (!words) {
+        words = "zero pesos";
+    }
+
+    //Added Only at the end
+    words = words.charAt(0).toUpperCase() + words.slice(1) + " only";
+
+    return words;
+}
+
+
+//Function to format numbers with comma
+function formatNumberWithCommas(value) {
+    let parts = value.replace(/,/g, '').split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
 }
 
 $(document).ready(function () {
 
-    //Init Select2 
+    //Added superscript on add customer details
+    $('#unit_floor').on('input', function () {
+        const inputVal = $(this).val();
 
+        //Function call for superscript
+        const formatted = formatOrdinal(inputVal);
+        $('#unit_floor').val(formatted);
+    });
+
+    //Added superscript on edit customer details
+    $('#upd_unit_floor').on('input', function () {
+        const inputVal = $(this).val();
+
+        //Function call for superscript
+        const formatted = formatOrdinal(inputVal);
+        $('#upd_unit_floor').val(formatted);
+    });
+
+    //Format with commas to .currency_format class
+    $('.currency_format').on('keypress', function (e) {
+        let charCode = e.which ? e.which : e.keyCode;
+        let charTyped = String.fromCharCode(charCode);
+        let currentVal = $(this).val();
+
+        //Allow digits
+        if (/\d/.test(charTyped)) return true;
+
+        //Allow only one decimal point
+        if (charTyped === '.' && currentVal.indexOf('.') === -1) return true;
+
+        //Block everything else
+        e.preventDefault();
+        return false;
+    });
+
+    $('.currency_format').on('input', function () {
+        let inputVal = $(this).val();
+
+        //Remove invalid characters (keep only digits and one decimal)
+        let numericVal = inputVal.replace(/[^\d.]/g, '');
+        numericVal = numericVal.replace(/^([^\.]*\.)|\./g, '$1');
+
+        //Format with commas
+        $(this).val(formatNumberWithCommas(numericVal));
+    });
+
+    //Init Select2 
     //For multiple signatories
     $('#signatories').select2({
         placeholder: "Choose signatories...",
@@ -140,23 +220,24 @@ $(document).ready(function () {
     });
 
     function bindNumberToWords(inputSelector, outputSelector) {
-
         $(inputSelector).on('input', function () {
-
-            let amount = parseFloat($(this).val());
+            let val = $(this).val();
+            let amount = parseFloat(val.replace(/,/g, ''));
 
             if (!isNaN(amount)) {
-                //Function call of num to words
-                let words = convertToPesosCentavosWords(amount);
-                $(outputSelector).val(words);
+                try {
+                    let words = convertToPesosCentavosWords(amount);
+                    $(outputSelector).val(words);
+                } catch (e) {
+                    $(outputSelector).val("Error number too large.");
+                }
             } else {
                 $(outputSelector).val("");
             }
-
         });
     }
 
-    //DRY
+    //For add customer module DRY
     bindNumberToWords('#net_selling_price', '#net_selling_price_word');
     bindNumberToWords('#equity', '#equity_word');
     bindNumberToWords('#loan_amount', '#loan_amount_word');
@@ -164,6 +245,33 @@ $(document).ready(function () {
     bindNumberToWords('#pagibig_interest', '#pagibig_interest_word');
     bindNumberToWords('#parking_nsp', '#parking_nsp_word');
     bindNumberToWords('#processing_fee', '#processing_fee_word');
+
+    //For edit customer module DRY
+    bindNumberToWords('#upd_net_selling_price', '#upd_net_selling_price_word');
+    bindNumberToWords('#upd_equity', '#upd_equity_word');
+    bindNumberToWords('#upd_loan_amount', '#upd_loan_amount_word');
+    bindNumberToWords('#upd_loan_term', '#upd_loan_term_word');
+    bindNumberToWords('#upd_pagibig_interest', '#upd_pagibig_interest_word');
+    bindNumberToWords('#upd_parking_nsp', '#upd_parking_nsp_word');
+    bindNumberToWords('#upd_processing_fee', '#upd_processing_fee_word');
+
+    //Validate trillion
+    $('.numberInput').on('input', function () {
+        //Get the raw input value
+        var rawValue = $(this).val();
+
+        //Remove anything that's not a digit or a decimal point
+        var cleanedValue = rawValue.replace(/[^0-9.]/g, '');
+
+        //Convert the cleaned string to a number
+        var value = parseFloat(cleanedValue);
+
+        //Check if it's a valid number and >= 1 trillion
+        if (!isNaN(value) && value >= 1000000000000) {
+            toastr.error('Error number too large.');
+            $(this).val(''); // Clear the input field
+        }
+    });
 
     //Server side datatable
     $('.datatable').DataTable({
@@ -225,7 +333,7 @@ $(document).ready(function () {
         const email = $('#email').val();
 
         //House details
-        const project_id = $('#project_id').val();
+        const project_id = $('#project_id option:selected').val();
         const house_no = $('#house_no').val();
         const lot = $('#lot').val();
         const block = $('#block').val();
@@ -312,23 +420,11 @@ $(document).ready(function () {
         // alert('clicked');
 
         //Validate required fields
-        if (!customer_code || !customer_name || !customer_address || !customer_id || !customer_tct_no || !customer_ctc || !customer_ctc_date || !customer_ctc_place || !civil_status || !citizenship || !employment || !designation || !company || !contact_no || !gender || !legality || !customer_spouse || !customer_spouse_id || !customer_spouse_ctc || !customer_spouse_ctc_date || !customer_spouse_ctc_place || !customer_contact_company || !customer_contact_position || !customer_contact_address || !income || !birthdate || !email) {
+        if (!customer_name || !customer_address || !civil_status || !contact_no || !gender || !birthdate) {
             toastr.error('Please fill in all required fields on customer details.');
             return;
-        } else if (project_id === '0' || !house_no || !lot || !block || !house_type || !lot_area || !floor_area || !condo_type || !unit_no || !unit_floor_area || !unit_floor || !unit_floor_sup || !parking_unit || !parking_unit_area || !parking_title_no || !parking_floor || !parking_floor_sup) {
-            toastr.error('Please fill in all required fields on house info.');
-            return;
-        } else if (!net_selling_price || !net_selling_price_word || !equity || !equity_word || !payment_term || !repricing || !loan_amount || !loan_amount_word || !loan_term || !loan_term_word || !pagibig_interest || !pagibig_interest_word || !parking_nsp || !parking_nsp_word || !processing_fee || !processing_fee_word || !regfees || !admin_fee || !additional_work || !transfer_tax || !docstamp_tax) {
-            toastr.error('Please fill in all required fields on pricing.');
-            return;
-        } else if (!technical_description_1 || !technical_description_2 || !house_description || !purpose) {
-            toastr.error('Please fill in all required fields on technical description.');
-            return;
-        } else if (!co_borrower_1 || !co_borrower_id_1 || !co_borrower_spouse_1 || !co_borrower_ctc_1 || !co_borrower_date_place_1 || !co_borrower_2 || !co_borrower_id_2 || !co_borrower_spouse_2 || !co_borrower_ctc_2 || !co_borrower_date_place_2 || !witness_a || !witness_b) {
-            toastr.error('Please fill in all required fields on co borrower.');
-            return;
-        } else if (!submitted_to_bir || !bir_actual_release || !car_process_remarks1 || !actual_dockets_preparation_for_RD || !car_process_remarks2 || !actual_preparation_of_docket_for_rd || !rd_assessment_remarks1 || !actual_submitted_to_rd_for_assessment || !actual_release_of_rd_assessment || !rd_assessment_remarks2 || !rd_assessment_received || !rcp_processed_signed || !accounting_received_rcp_for_m_check || !accounting_processed_m_check || !accounting_m_check_for_released || !check_process_remarks1 || !m_check_received || !check_process_remarks2 || !date_submitted_to_rd || !estimated_date_of_release || !actual_date_released) {
-            toastr.error('Please fill in all required fields on titling monitoring.');
+        } else if (project_id === '0') {
+            toastr.error('Please select a project at house info.');
             return;
         } else {
 
@@ -573,7 +669,7 @@ $(document).ready(function () {
 
         //House details
         const upd_house_id = $('#upd_house_id').val();
-        const upd_project_id = $('#upd_project_id').val();
+        const upd_project_id = $('#upd_project_id option:selected').val();
         const upd_house_no = $('#upd_house_no').val();
         const upd_lot = $('#upd_lot').val();
         const upd_block = $('#upd_block').val();
@@ -661,8 +757,11 @@ $(document).ready(function () {
         // alert('clicked');
 
         // Validate required fields
-        if (!upd_customer_code) {
-            alert('Please fill in all required fields.');
+        if (!upd_customer_name || !upd_customer_address || !upd_civil_status || !upd_contact_no || !upd_gender || !upd_birthdate) {
+            toastr.error('Please fill in all required fields on customer details.');
+            return;
+        } else if (upd_project_id === '0') {
+            toastr.error('Please select a project at house info.');
             return;
         } else {
             // Update customer details
@@ -843,3 +942,4 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+

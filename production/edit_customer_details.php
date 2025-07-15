@@ -249,20 +249,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             <table class="table table-bordered" style="margin-bottom:0;">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th style="width:20%;">Customer Code <span style="color:red">*</span></th>
+                                                                        <th style="width:20%;">Customer Code</th>
                                                                         <td>
                                                                             <input type="test" id="upd_custom_id" value="' . $row['custom_id'] . '" hidden>
                                                                             <input type="test" id="upd_house_id" value="' . $row['house_id'] . '" hidden>
                                                                             <input type="test" id="upd_cont_tit_id" value="' . $row['cont_tit_id'] . '" hidden>
                                                                             <input type="text" class="form-control" id="upd_customer_code" name="upd_customer_code" value="' . $row['customer_code'] . '" readonly>
                                                                         </td>
-                                                                        <th style="width:20%;">Customer Name</th>
+                                                                        <th style="width:20%;">Customer Name <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <input type="text" class="form-control" id="upd_customer_name" name="upd_customer_name" value="' . $row['customer_name'] . '">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Customer Address</th>
+                                                                        <th>Customer Address <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <input type="text" class="form-control" id="upd_customer_address" name="upd_customer_address" value="' . $row['customer_address'] . '">
                                                                         </td>
@@ -292,7 +292,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Civil Status</th>
+                                                                        <th>Civil Status <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <select class="form-control" id="upd_civil_status" name="upd_civil_status">
                                                                             <option value="' . $row['civil_status'] . '" selected hidden>' . $row['civil_status'] . '</option>';
@@ -332,13 +332,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                         <td>
                                                                             <input type="text" class="form-control" id="upd_company" name="upd_company" value="' . $row['company'] . '">
                                                                         </td>
-                                                                        <th>Contact No</th>
+                                                                        <th>Contact No. <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <input type="tel" class="form-control" id="upd_contact_no" name="upd_contact_no" pattern="^(09|\+639)\d{9}$" maxlength="13" placeholder="e.g. 09171234567" title="Please enter a mobile number (e.g. 09171234567 or +639171234567)" value="' . $row['contact_no'] . '">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Gender</th>
+                                                                        <th>Gender <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <select class="form-control" id="upd_gender" name="upd_gender">
                                                                                 <option value="' . $row['gender'] . '" selected hidden>' . $row['gender'] . '</option>';
@@ -400,7 +400,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                         <td>
                                                                             <input type="text" class="form-control" id="upd_income" name="upd_income" value="' . $row['income'] . '">
                                                                         </td>
-                                                                        <th>Birthdate</th>
+                                                                        <th>Birthdate <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <input type="date" class="form-control" id="upd_birthdate" name="upd_birthdate" value="' . $row['birthdate'] . '">
                                                                         </td>
@@ -435,7 +435,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             <table class="table table-bordered" style="margin-bottom:0;">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th style="width:20%;">Project <span style="color:red">*</span></th>
+                                                                        <th style="width:20%;">Project <span style="color: red">*</span></th>
                                                                         <td>
                                                                             <select class="form-control" id="upd_project_id" name="project">
                                                                                 <option value="' . $row['project_id'] . '" selected hidden>' . $row['project_name'] . '</option>';
@@ -555,21 +555,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th style="width:25%;">Net Selling Price</th>
                                                                         <td style="width:25%;">
-                                                                            <input type="text" class="form-control" id="upd_net_selling_price" name="upd_net_selling_price" placeholder="0.00" value="' . $row['net_selling_price'] . '">
+                                                                            <input type="text" class="form-control currency_format" id="upd_net_selling_price" name="upd_net_selling_price" placeholder="0.00" value="' . $row['net_selling_price'] . '">
                                                                         </td>
                                                                         <th style="width:20%;">Net Selling Price (in Words)</th>
                                                                         <td style="width:30%;">
-                                                                            <input type="text" class="form-control" id="upd_net_selling_price_word" name="upd_net_selling_price_word" style="width:100%; min-width:300px;" value="' . $row['net_selling_price_word'] . '">
+                                                                            <input type="text" class="form-control" id="upd_net_selling_price_word" name="upd_net_selling_price_word" style="width:100%; min-width:300px;" value="' . $row['net_selling_price_word'] . '" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th style="width:25%;">Equity</th>
                                                                         <td style="width:25%;">
-                                                                            <input type="text" class="form-control" id="upd_equity" name="upd_equity" placeholder="0.00" value="' . $row['equity'] . '">
+                                                                            <input type="text" class="form-control currency_format" id="upd_equity" name="upd_equity" placeholder="0.00" value="' . $row['equity'] . '">
                                                                         </td>
                                                                         <th style="width:20%;">Equity (in Words)</th>
                                                                         <td style="width:30%;">
-                                                                            <input type="text" class="form-control" id="upd_equity_word" name="upd_equity_word" style="width:100%; min-width:300px;" value="' . $row['equity_word'] . '">
+                                                                            <input type="text" class="form-control" id="upd_equity_word" name="upd_equity_word" style="width:100%; min-width:300px;" value="' . $row['equity_word'] . '" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -585,77 +585,77 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <tr>
                                                                         <th>Loan Amount</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_loan_amount" name="upd_loan_amount" value="' . $row['loan_amount'] . '">
+                                                                            <input type="text" class="form-control currency_format" id="upd_loan_amount" name="upd_loan_amount" value="' . $row['loan_amount'] . '">
                                                                         </td>
                                                                         <th>Loan Amount (in Words)</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_loan_amount_word" name="upd_loan_amount_word" style="width:100%; min-width:300px;" value="' . $row['loan_amount_word'] . '">
+                                                                            <input type="text" class="form-control" id="upd_loan_amount_word" name="upd_loan_amount_word" style="width:100%; min-width:300px;" value="' . $row['loan_amount_word'] . '" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Loan Term</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_loan_term" name="upd_loan_term" value="' . $row['loan_term'] . '">
+                                                                            <input type="text" class="form-control currency_format" id="upd_loan_term" name="upd_loan_term" value="' . $row['loan_term'] . '">
                                                                         </td>
                                                                         <th>Loan Term (in Words)</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_loan_term_word" name="upd_loan_term_word" style="width:100%; min-width:300px;" value="' . $row['loan_term_word'] . '">
+                                                                            <input type="text" class="form-control" id="upd_loan_term_word" name="upd_loan_term_word" style="width:100%; min-width:300px;" value="' . $row['loan_term_word'] . '" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Pagibig Interest</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_pagibig_interest" name="upd_pagibig_interest" value="' . $row['pagibig_interest'] . '">
+                                                                            <input type="text" class="form-control currency_format" id="upd_pagibig_interest" name="upd_pagibig_interest" value="' . $row['pagibig_interest'] . '">
                                                                         </td>
                                                                         <th>Pagibig Interest (in Words)</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_pagibig_interest_word" name="upd_pagibig_interest_word" style="width:100%; min-width:300px;" value="' . $row['pagibig_interest_word'] . '">
+                                                                            <input type="text" class="form-control" id="upd_pagibig_interest_word" name="upd_pagibig_interest_word" style="width:100%; min-width:300px;" value="' . $row['pagibig_interest_word'] . '" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Parking NSP</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_parking_nsp" name="upd_parking_nsp" value="' . $row['parking_nsp'] . '">
+                                                                            <input type="text" class="form-control currency_format" id="upd_parking_nsp" name="upd_parking_nsp" value="' . $row['parking_nsp'] . '">
                                                                         </td>
                                                                         <th>Parking NSP (in Words)</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_parking_nsp_word" name="upd_parking_nsp_word" style="width:100%; min-width:300px;" value="' . $row['parking_nsp_word'] . '">
+                                                                            <input type="text" class="form-control" id="upd_parking_nsp_word" name="upd_parking_nsp_word" style="width:100%; min-width:300px;" value="' . $row['parking_nsp_word'] . '" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Processing Fee</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_processing_fee" name="upd_processing_fee" value="' . $row['processing_fee'] . '">
+                                                                            <input type="text" class="form-control currency_format" id="upd_processing_fee" name="upd_processing_fee" value="' . $row['processing_fee'] . '">
                                                                         </td>
                                                                         <th>Processing Fee (in Words)</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_processing_fee_word" name="upd_processing_fee_word" style="width:100%; min-width:300px;" value="' . $row['processing_fee_word'] . '">
+                                                                            <input type="text" class="form-control" id="upd_processing_fee_word" name="upd_processing_fee_word" style="width:100%; min-width:300px;" value="' . $row['processing_fee_word'] . '" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Regfees</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_regfees" name="upd_regfees" value="' . $row['regfees'] . '">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="upd_regfees" name="upd_regfees" value="' . $row['regfees'] . '">
                                                                         </td>
                                                                         <th>Admin Fee</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_admin_fee" name="upd_admin_fee" value="' . $row['admin_fee'] . '">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="upd_admin_fee" name="upd_admin_fee" value="' . $row['admin_fee'] . '">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Additional Work</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_additional_work" name="upd_additional_work" value="' . $row['additional_work'] . '">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="upd_additional_work" name="upd_additional_work" value="' . $row['additional_work'] . '">
                                                                         </td>
                                                                         <th>Transfer Tax</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_transfer_tax" name="upd_transfer_tax" value="' . $row['transfer_tax'] . '">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="upd_transfer_tax" name="upd_transfer_tax" value="' . $row['transfer_tax'] . '">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Docstamp Tax</th>
                                                                         <td>
-                                                                            <input type="text" class="form-control" id="upd_docstamp_tax" name="upd_docstamp_tax" value="' . $row['docstamp_tax'] . '">
+                                                                            <input type="text" class="form-control currency_format numberInput" id="upd_docstamp_tax" name="upd_docstamp_tax" value="' . $row['docstamp_tax'] . '">
                                                                         </td>
                                                                         <th></th>
                                                                         <td></td>

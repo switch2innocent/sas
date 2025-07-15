@@ -15,10 +15,10 @@ $download = $download_contract_file->download_contract_files();
 if ($download->rowCount() > 0) {
     $doc = $download->fetch(PDO::FETCH_ASSOC);
 
-    // Send headers to trigger file download
+    //Send headers to trigger file download
     header('Content-Description: File Transfer');
     header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-    header('Content-Disposition: attachment; filename="Contract_' . $download_contract_file->id . '.docx"');
+    header('Content-Disposition: attachment; filename="' . $doc['contract_name'] . '"');
     header('Content-Transfer-Encoding: binary');
     header('Expires: 0');
     header('Cache-Control: must-revalidate');

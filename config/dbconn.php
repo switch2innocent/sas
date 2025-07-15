@@ -3,10 +3,10 @@
 class Connection
 {
 
-    private $host = "192.168.2.2";
+    private $host = "localhost";
     private $dbname = "idsdb";
-    private $username = "admin";
-    private $password = "admin";
+    private $username = "root";
+    private $password = "";
 
     private $conn;
 

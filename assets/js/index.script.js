@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+    // Enter key
+    $(document).on('keydown', (e) => {
+        if (e.key === 'Enter') {
+            $('.submit').trigger('click');
+        }
+    });
+
     //Login users
     $('.submit').on('click', (e) => {
         e.preventDefault();

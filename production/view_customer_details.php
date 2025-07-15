@@ -258,7 +258,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             <table class="table table-bordered" style="margin-bottom:0;">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th style="width:20%;">Customer Code <span style="color:red">*</span></th>
+                                                                        <th style="width:20%;">Customer Code</th>
                                                                         <td>
                                                                             <input type="text" class="form-control" id="customer_code" name="customer_code" value="' . $row['customer_code'] . '" readonly>
                                                                         </td>
@@ -423,7 +423,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                             <table class="table table-bordered" style="margin-bottom:0;">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th style="width:20%;">Project <span style="color:red">*</span></th>
+                                                                        <th style="width:20%;">Project</th>
                                                                         <td>
                                                                             <select class="form-control" id="project_id" name="project" disabled>
                                                                                 <option value="0">' . $row['project_name'] . '</option>
@@ -805,8 +805,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                     <small style="color:#888;">(Please fill in all required fields)</small>
                                                                 </div>
                                                             </div>
-                                                            <table class="table table-bordered" style="margin-bottom:0;">
-                                                                <thead>
+                                                          <table id="datatable" class="table table-bordered table-striped">
+                                                        <thead>
                                                                     <tr>
                                                                         <th class="text-center">Contract Name</th>
                                                                         <th class="text-center">Action</th>
@@ -815,7 +815,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                                                 <tbody>';
                                         $get_contract_monitoring = new ContractTitlingMonitoring($db);
 
-                                        $get_contract_monitoring->id = $row['project_id'];
+                                        $get_contract_monitoring->id = $row['view_projects'];
 
                                         $get = $get_contract_monitoring->get_contract_monitorings();
                                         while ($row2 = $get->fetch(PDO::FETCH_ASSOC)) {
@@ -1008,7 +1008,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
             <!-- Modal for Create Signatories -->
             <div class="modal fade" id="selectSignatoriesModal" tabindex="-1" role="dialog" aria-labelledby="selectSignatoriesModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-dialog modal-md" role="document">
                     <form id="signatoriesForm">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -1019,7 +1019,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <form>
                                     <div class="form-group">
                                         <label for="company_main">
-                                            <i class="fa fa-building" aria-hidden="true" style="margin-right:5px;"></i>Company <span style="color:red">*</span>
+                                            <i class="fa fa-building" aria-hidden="true" style="margin-right:5px;"></i>Company <span style="color: red">*</span>
                                         </label>
                                         <select id="company_main" name="company_main" class="form-control" style="width:100%;">
                                             <option value="0" selected disabled>Choose company...</option>
@@ -1035,7 +1035,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     </div>
                                     <div class="form-group">
                                         <label for="projects_main">
-                                            <i class="fa fa-building" aria-hidden="true" style="margin-right:5px;"></i>Project <span style="color:red">*</span>
+                                            <i class="fa fa-gear" aria-hidden="true" style="margin-right:5px;"></i>Project <span style="color: red">*</span>
                                         </label>
                                         <select id="projects_main" name="projects_main" class="form-control" style="width:100%;">
                                             <option value="0" selected disabled>Choose project...</option>
@@ -1051,7 +1051,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     </div>
                                     <div class="form-group">
                                         <label for="signatories">
-                                            <i class="fa fa-users" aria-hidden="true" style="margin-right:5px;"></i>Signatories <small>(<b>NOTE:</b> Please Select 2 Signatories)</small> <span style="color:red">*</span>
+                                            <i class="fa fa-users" aria-hidden="true" style="margin-right:5px;"></i>Signatories <small>(<b>NOTE:</b> Please Select 2 Signatories)</small> <span style="color: red">*</span>
                                         </label>
                                         <select id="signatories" name="signatories" class="form-control" multiple="multiple" style="width:100%;">
                                             <?php

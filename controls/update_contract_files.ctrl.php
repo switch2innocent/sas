@@ -13,6 +13,7 @@ $update_contract_file->id = $_POST['id'];
 $update_contract_file->contract_name = $_POST['contract_name'];
 $update_contract_file->contract_file = file_get_contents($_FILES['contract_file']['tmp_name']);
 $update_contract_file->contract_type_id = $_POST['contract_type_id'];
+$update_contract_file->updated_by = $_SESSION['user_id'];
 
 $update = $update_contract_file->update_contract_files();
 

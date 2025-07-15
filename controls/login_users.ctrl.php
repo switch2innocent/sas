@@ -23,6 +23,7 @@ if ($row = $login->fetch(PDO::FETCH_ASSOC)) {
     $_SESSION['user_position'] = $row['position'];
     $_SESSION['user_role'] = $row['role'];
     $_SESSION['user_name'] = $row['username'];
+    $_SESSION['fullname'] = $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];
 
     echo 1;
 } else {

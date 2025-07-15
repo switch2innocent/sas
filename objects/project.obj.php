@@ -71,7 +71,7 @@ class Project
 
     public function increment_project_codes()
     {
-        $sql = "SELECT MAX(project_code) AS max_code FROM project_tbl WHERE is_active = 1";
+        $sql = "SELECT MAX(project_code) AS max_code FROM project_tbl";
         $increment_project_code = $this->conn->prepare($sql);
 
         $increment_project_code->execute();
@@ -103,7 +103,7 @@ class Project
         $sql = "UPDATE project_tbl SET project_code=?, company_code=?, project_name=?, location=?, city=?, province=?, association=?, registry=?, project_tct_no=?, condo=?, 
         contract_remarks_1=?, contract_date_1=?, contract_remarks_2=?, contract_date_2=?, contract_remarks_3=?, contract_date_3=?, contract_remarks_4=?, contract_date_4=?, contract_remarks_5=?, contract_date_5=?, 
         pagibig_remarks_1=?, pagibig_date_1=?, pagibig_remarks_2=?, pagibig_date_2=?, pagibig_remarks_3=?, pagibig_date_3=?, pagibig_remarks_4=?, pagibig_date_4=?, pagibig_remarks_5=?, pagibig_date_5=?, 
-        titling_remarks_1=?, titling_date_1=?, titling_remarks_2=?, titling_date_2=?, titling_remarks_3=?, titling_date_3=?, titling_remarks_4=?, titling_date_4=?, titling_remarks_5=?, titling_date_5=? WHERE id=?";
+        titling_remarks_1=?, titling_date_1=?, titling_remarks_2=?, titling_date_2=?, titling_remarks_3=?, titling_date_3=?, titling_remarks_4=?, titling_date_4=?, titling_remarks_5=?, titling_date_5=?, updated_by=?, date_updated=NOW() WHERE id=?";
         $update_project = $this->conn->prepare($sql);
 
         $update_project->bindParam(1, $this->project_code);
@@ -146,7 +146,8 @@ class Project
         $update_project->bindParam(38, $this->titling_date_4);
         $update_project->bindParam(39, $this->titling_remarks_5);
         $update_project->bindParam(40, $this->titling_date_5);
-        $update_project->bindParam(41, $this->project_id);
+        $update_project->bindParam(41, $this->updated_by);
+        $update_project->bindParam(42, $this->project_id);
 
         if ($update_project->execute()) {
             return true;

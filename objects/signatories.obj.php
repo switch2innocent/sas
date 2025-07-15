@@ -82,7 +82,7 @@ class Signatories
 
     public function update_signatories()
     {
-        $sql = "UPDATE signatories_tbl SET company_person=?, company_position=?, company_person_tin=?, person_ctc=?, person_ctc_date_place=? WHERE id=?";
+        $sql = "UPDATE signatories_tbl SET company_person=?, company_position=?, company_person_tin=?, person_ctc=?, person_ctc_date_place=?, updated_by=?, date_updated=NOW() WHERE id=?";
         $update_signatory = $this->conn->prepare($sql);
 
         $update_signatory->bindParam(1, $this->company_person);
@@ -90,7 +90,8 @@ class Signatories
         $update_signatory->bindParam(3, $this->company_person_tin);
         $update_signatory->bindParam(4, $this->person_ctc);
         $update_signatory->bindParam(5, $this->person_ctc_date_place);
-        $update_signatory->bindParam(6, $this->id);
+        $update_signatory->bindParam(6, $this->updated_by);
+        $update_signatory->bindParam(7, $this->id);
 
         $update_signatory->execute();
         return $update_signatory;

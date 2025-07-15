@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once '../config/dbconn.php';
 require_once '../objects/signatories.obj.php';
@@ -13,6 +14,7 @@ $update_signatory->company_position = $_POST['company_position'];
 $update_signatory->company_person_tin = $_POST['company_person_tin'];
 $update_signatory->person_ctc = $_POST['person_ctc'];
 $update_signatory->person_ctc_date_place = $_POST['person_ctc_date_place'];
+$update_signatory->updated_by = $_SESSION['user_id'];
 $update_signatory->id = $_POST['id'];
 
 if ($update_signatory->update_signatories()) {

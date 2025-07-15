@@ -36,6 +36,7 @@ $update_customer->customer_contact_address = $_POST['customer_contact_address'];
 $update_customer->income = $_POST['income'];
 $update_customer->birthdate = $_POST['birthdate'];
 $update_customer->email = $_POST['email'];
+$update_customer->updated_by = $_SESSION['user_id'];
 $update_customer->id = $_POST['upd_custom_id'];
 
 if ($update_customer->update_customers()) {

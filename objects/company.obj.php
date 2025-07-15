@@ -67,7 +67,7 @@ class Company
 
     public function update_companys()
     {
-        $sql = "UPDATE company_tbl SET company_code=?, company_name=?, company_address=?, city_notary=?, company_city=?, company_tin=?, company_ctc=?, company_ctc_date=?, company_ctc_place=?, company_person_a=?, company_position_a=?, company_person_tin_a=?, person_ctc_a=?, person_ctc_date_place_a=?, company_person_b=?, company_position_b=?, company_person_tin_b=?, person_ctc_b=?, person_ctc_date_place_b=?, pagibig_person=?, pagibig_address=?, pagibig_position=? WHERE id=?";
+        $sql = "UPDATE company_tbl SET company_code=?, company_name=?, company_address=?, city_notary=?, company_city=?, company_tin=?, company_ctc=?, company_ctc_date=?, company_ctc_place=?, company_person_a=?, company_position_a=?, company_person_tin_a=?, person_ctc_a=?, person_ctc_date_place_a=?, company_person_b=?, company_position_b=?, company_person_tin_b=?, person_ctc_b=?, person_ctc_date_place_b=?, pagibig_person=?, pagibig_address=?, pagibig_position=?, updated_by=?, date_updated=NOW() WHERE id=?";
         $update_company = $this->conn->prepare($sql);
 
         $update_company->bindParam(1, $this->company_code);
@@ -92,7 +92,8 @@ class Company
         $update_company->bindParam(20, $this->pagibig_person);
         $update_company->bindParam(21, $this->pagibig_address);
         $update_company->bindParam(22, $this->pagibig_position);
-        $update_company->bindParam(23, $this->id);
+        $update_company->bindParam(23, $this->updated_by);
+        $update_company->bindParam(24, $this->id);
 
         if ($update_company->execute()) {
             return true;

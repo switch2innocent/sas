@@ -49,6 +49,7 @@ $update_project->titling_remarks_4 = $_POST['upd_titling_remarks_4'];
 $update_project->titling_date_4 = $_POST['upd_titling_date_4'];
 $update_project->titling_remarks_5 = $_POST['upd_titling_remarks_5'];
 $update_project->titling_date_5 = $_POST['upd_titling_date_5'];
+$update_project->updated_by = $_SESSION['user_id'];
 $update_project->project_id = $_POST['upd_project_id'];
 
 if ($update_project->update_projects()) {
